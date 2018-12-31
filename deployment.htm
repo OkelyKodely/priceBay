@@ -1,0 +1,90 @@
+<html>
+<head>
+	<title>Deployment ASP Uploader</title>
+    <link rel="stylesheet" href="example.css" type="text/css" />
+    <link rel="stylesheet" href="SyntaxHighlighter.css" type="text/css" />    
+</head>
+<body>
+    <table width="100%">
+		<tr>
+			<td>
+			    <a href="default.htm"><img alt="ASP Uploader" src="http://aspuploader.com/images/logo.gif" /></a>
+			</td>
+			<td align="right">
+				<a href="http://AjaxUploader.com/">Ajax Uploader for ASP.NET</a>
+			</td>
+		</tr>
+		<tr>
+		    <td colspan="2" class="topmenu">
+			    <a class="menu" href="default.htm" title="Home">Home</a> | 
+			    <a class="menu" href="demo.htm">Demo</a> | 
+			    <a class="menu" href="deployment.htm">Deployment</a> | 
+			    <a class="menu" href="http://CuteSoft.net/forums/" title="File Upload Forums">Forums</a> | 
+			    <a class="menu" href="http://aspuploader.com/Order.asp" title="Purchase">Order</a>
+			</td>
+		</tr>
+	</table>
+	<table style="width:750px;" cellpadding="15">
+		<tr>
+			<td>
+			    <h1>Deployment</h1>
+						   ASP Uploader is 100% HTML and JavaScript code on the client, and ASP code on the server, and can be setup on your web server in just 5 minutes,
+        simply by following this setup guide.
+        <br />
+        <br />
+            <table width="100%" border="0">
+              <tr>
+                <td>
+                  <h5>1. Deploying Uploader Client files. </h5>
+                  <p>
+                    The "aspuploader" folder and all file it contains (located in the archive) should be deployed to http://{your site}/{your application}/aspuploader/ on your web site.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                   <br />
+                  <h5>2. Adding Uploader into ASP page.</h5>
+<div class="dp-highlighter">
+<div class="bar"></div>
+<ol class="dp-xml">
+    <li class="alt"><span style="background-color: yellow" class="tag">&lt;</span><span style="background-color: yellow">%</span><span> @&nbsp;</span><span class="attribute">Language</span><span>=</span><span class="attribute-value">"VBScript" </span><span style="background-color: yellow">%</span><span style="background-color: yellow" class="tag">&gt;</span><span>&nbsp;&nbsp;</span></li>
+    <li><span></span><span class="comments">&lt;!--Step&nbsp;1:&nbsp;Register&nbsp;Uploader&nbsp;to&nbsp;your&nbsp;page&nbsp;--&gt;</span><span>&nbsp;&nbsp;</span></span></li>
+    <li class="alt"><span></span><span class="comments">&lt;!--&nbsp;#include&nbsp;file="aspuploader/include_aspuploader.asp"&nbsp;--&gt;</span><span>&nbsp;&nbsp;</span></span></li>
+    <li><span></span><span class="tag">&lt;</span><span class="tag-name">html</span><span class="tag">&gt;</span><span>&nbsp;&nbsp;</span></span></li>
+    <li class="alt"><span></span><span class="tag">&lt;</span><span class="tag-name">body</span><span class="tag">&gt;</span><span>&nbsp;&nbsp;</span></span></li>
+    <li>&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;</span><span class="tag-name">div</span><span class="tag">&gt;</span><span>&nbsp;&nbsp;</span></span></li>
+    <li class="alt">&nbsp;&nbsp;&nbsp;&nbsp;<span style="background-color: yellow" class="tag">&lt;</span><span style="background-color: yellow">%</span></li>
+    <li><span class="comments">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'Step&nbsp;2:&nbsp;Create&nbsp;Uploader&nbsp;object&nbsp;&nbsp; &nbsp;&nbsp;</span></li>
+    <li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dim&nbsp;uploader &nbsp;&nbsp;</span></li>
+    <li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Set&nbsp;</span><span class="attribute">uploader</span><span>=</span><span class="attribute-value">new</span><span>&nbsp;AspUploader &nbsp;&nbsp;</span></span></li>
+    <li><span class="comments">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'Step&nbsp;3:&nbsp;Set a unique name to Uploader</span></li>
+    <li class="alt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="vars">uploader</span><span>.Name=</span><span class="string">"myuploader"</span></span></li>
+    <li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="attribute">uploader.SaveDirectory</span><span>=</span><span class="attribute-value">"savefiles"</span><span>&nbsp;&nbsp;</span></span></li>
+    <li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="attribute">uploader.AllowedFileExtensions</span><span>=</span><span class="attribute-value">"*.jpg,*.png,*.gif"</span><span>&nbsp;&nbsp;</span></span></li>
+    <li><span class="comments">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'Step&nbsp;4:&nbsp;Render&nbsp;Uploader</span></li>
+    <li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;uploader.Render()</span></li>
+    <li class="alt">&nbsp;&nbsp;&nbsp;&nbsp;<span style="background-color: yellow">%</span><span style="background-color: yellow" class="tag">&gt;</span><span>&nbsp;&nbsp;</span></span></li>
+    <li>&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;/</span><span class="tag-name">div</span><span class="tag">&gt;</span><span>&nbsp;&nbsp;</span></span></li>
+    <li class="alt"><span></span><span class="tag">&lt;/</span><span class="tag-name">body</span><span class="tag">&gt;</span><span>&nbsp;&nbsp;</span></span></li>
+    <li><span></span><span class="tag">&lt;/</span><span class="tag-name">html</span><span class="tag">&gt;</span><span>&nbsp;&nbsp;</span></span> </li>
+</ol>
+</div>
+                
+                </td>
+              </tr>
+              
+           </table>
+
+			</td>
+			<td width="150">
+				<div class="box f4">
+					<img alt="" src="http://aspuploader.com/images/WindowsLogo.gif" style="float:right" />
+					This control is also available for <b>ASP.NET</b>!<br />
+					<a href="http://ajaxuploader.com/" target="_blank">Ajax Uploader for .NET</a>						
+				</div>
+			</td>
+		</tr>
+	</table>
+</body>
+</html>
