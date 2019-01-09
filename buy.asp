@@ -8,10 +8,12 @@
     category = "all"
   end if
   %>
+  <h1>&nbsp;</h1>
+  <h1 style="position:relative;left:100px">Pay for priceBay items</h1>
   <div class="shop">
   
     <div class="shoptitle">
-  	  <span style="font-size:23">Please Enter Your Credit Card & Shipping</span><br><br>
+  	  <span style="font-size:23">Please Enter Your Credit Card & Shipping Information</span><br><br>
     </div>
     <%
     dim cartid
@@ -76,9 +78,9 @@
           Your State: <input type=text name="x_custom_5"/><br><br>
           Your Zip Code: <input type=text name="x_custom_6"/><br><br>
           Your Country: <input type=text name="x_custom_7"/><br><br><br>
-          <input type="submit" value="Proceed" style="width: 150px; height:50px" />
+          <input type="submit" value="Proceed to Pay" style="width: 150px; height:50px" />
           <input type=hidden id="x_amount" name="x_amount" value=<%=t+20%>/>
-          <input type=hidden id="x_relay_url" name="x_relay_url" value='http://104.175.56.210/relayresponse.asp'/>
+          <input type=hidden id="x_relay_url" name="x_relay_url" value='http://172.3.226.131/relayresponse.asp'/>
           <input type=hidden id="x_relay_response" name="x_relay_response" value='Y'/>
           <input type=hidden id="x_type" name="x_type" value='AUTH_CAPTURE'/>
           <input type=hidden id="x_currency_code" name="x_currency_code" value='USD'/>
@@ -91,7 +93,10 @@
   %>
 
   </div>
-  
-  <div style="position:relative;left:200px;top:100px">
+  <h1>&nbsp;</h1>
+  <h1>&nbsp;</h1>
+  <h1>&nbsp;</h1>
+  <h1>&nbsp;</h1>
+  <h1>&nbsp;</h1>
+  <h1>&nbsp;</h1>
     <!-- #include file="inc/footer.inc" -->
-  </div>

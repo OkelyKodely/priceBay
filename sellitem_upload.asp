@@ -55,22 +55,22 @@ up = request.form("up")
 
     <form name="frmSend" method="POST" action="sellitem_upload.asp"  >
       <input type="hidden" name="up" value="yes">
-      <div style="float:left;width:140px">Item Name:</div>
+      <div style="float:left;width:260px">Item Name:</div>
       <div style="loat:left"><input type="text" name="name"></div>
       <span><br></span>
-      <div style="float:left;width:140px">Listing Price:</div>
+      <div style="float:left;width:260px">Listing Price:</div>
       <div style="loat:left"><input type="text" name="price"></div>
       <span><br></span>
       <input id="fn" type="hidden" name="filename">
       <div style="loat:left"><a href=""></a></div>
       <span><br></span>
-      <div style="float:left;width:140px">Description:</div>
+      <div style="float:left;width:260px">Description:</div>
       <div style="loat:left"><textarea name="description" style="width:200px;height:100px"></textarea></div>
       <span><br></span>
-      <div style="float:left;width:140px">Shipping Policy:</div>
+      <div style="float:left;width:260px">Shipping Policy:</div>
       <div style="loat:left"><input type="text" name="shippingpolicy"></div>
       <span><br></span>
-      <div style="float:left;width:140px">Listing Duration:</div>
+      <div style="float:left;width:260px">Listing Duration (in days):</div>
       <div style="loat:left"><input type="text" name="duration" style="width:50px;height:50px"></div>
       <span><br></span>
       <p></p>
@@ -80,7 +80,7 @@ up = request.form("up")
         uploader.Name="myuploader"
         
         uploader.MaxSizeKB=10240
-        uploader.InsertText="Submit"
+        uploader.InsertText="Submit Item"
             uploader.AllowedFileExtensions="*.jpg,*.png,*.gif,*.zip"
         uploader.MultipleFilesUpload=true
         
@@ -101,6 +101,4 @@ up = request.form("up")
   </script>
     </form>
 
-  <div style="position:relative;left:200px;top:100px">
     <!-- #include file="inc/footer.inc" -->
-  </div>

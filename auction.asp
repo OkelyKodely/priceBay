@@ -8,10 +8,15 @@
     category = "all"
   end if
   %>
-  <div class="shop">
+  <h1>&nbsp;</h1>
+  <div class="auction">
   
-    <div class="shoptitle">
-  	  <span style="font-size:26">Auction</span>
+    <div class="shoptitle" style="height:60px">
+  	  <span style="font-size:26">Item Auction</span>
+    </div>
+
+    <div class="shoptitle" style="height:60px">
+      ><a href="auction.asp"><span style="font-size:16">Your Other Auctions</span></a>
     </div>
 
     <%
@@ -64,16 +69,24 @@
       idd = oRS("id")
 
       sqlstr = "SELECT * FROM Bids WHERE itemid = " & idd & " ORDER BY bidamount DESC"
-'response.write sqlstr
+
       set uRS = oConnection.Execute(sqlstr)
 
       if not uRS.eof then
 
         uname = uRS("username")
 
-        sqlstr = "INSERT INTO mustpay (username, itemid) VALUES ('"&uname&"',"&idd&")"
-'response.write sqlstr
-        oConnection.Execute(sqlstr)
+        sqlstr = "SELECT * FROM mustpay WHERE itemid = " & idd & " and username = '"&uname&"'"
+
+        set oo = oConnection.execute(sqlstr)
+
+        if oo.eof then
+
+          sqlstr = "INSERT INTO mustpay (username, itemid) VALUES ('"&uname&"',"&idd&")"
+
+          oConnection.Execute(sqlstr)
+
+        end if
 
       end if
 
@@ -83,13 +96,18 @@
 
     set oRS = oConnection.Execute(sqlstr)
 
+    dim closed
+
     if not oRS.eof then
+      closed = true
     %>
-    <%=oRS("username")%> won this item.  <font color="red">Auction closed!</font>
+    <div style="height:60px">
+      <%=oRS("username")%> won this item.  <font color="red">Auction closed!</font>
+    </div>
     <%
     end if
 
-    sqlstr = "SELECT price, image, description, name, id, duration, DATEADD(day, duration, inputdate) deadline FROM sellproducts WHERE id='" & itemid & "'"
+    sqlstr = "SELECT name, price, image, shippingpolicy, description, id, duration, DATEADD(day, duration, inputdate) deadline FROM sellproducts WHERE id='" & itemid & "'"
 
     set oRS = oConnection.Execute(sqlstr)
 
@@ -99,17 +117,19 @@
     %>
   <div id = "container" style = "width:100%">
       <div id = "middle" style = "float:left; width: 250;">
-          <a href=item.asp?itemid=<%=oRS("id")%>><img width="220" src=/productitems/<%=oRS("image")%>></a>
-          <br><%=oRS("name")%>
+          <a href=item.asp?itemid=<%=oRS("id")%>><img width="220" height="150" src=/productitems/<%=oRS("image")%>></a>
+          <br>Title: <%=oRS("name")%>
       </div>
-      <div id = "right" style = "float:left; width: 200;">
+      <div id = "right" style = "float:left; width: 200px;">
         <span style="color:#000">Description:</span>
         <%=dsc%><br><br>
+        <span style="color:#000">Shipping Policy:</span>
+        <%=oRS("shippingpolicy")%><br><br>
         <span style="color:#000">Minimum Price:</span>
         $<%=oRS("price")%><br><br>
         <%
         sqlstr = "SELECT username, bidamount FROM Bids WHERE itemid='" & itemid & "' ORDER BY id DESC"
-''response.write sqlstr
+
         set uRS = oConnection.Execute(sqlstr)
 
         if not uRS.eof then%>
@@ -121,18 +141,18 @@
         <span style="color:#000">Deadline:</span>
         <%=oRS("deadline")%><br><br>
         <%if not uRS.eof then%>
-        <span style="color:#000">Last bid by <%=uRS("username")%> at $<%=uRS("bidamount")%> USD.</span><br><br>
+        <span style="color:#000">Last bid by <span style=color:red><%=uRS("username")%> at $<%=uRS("bidamount")%> USD</span>.</span><br><br>
         <%end if%>
         <%
-        if username <> "" then
+        if username <> "" and not closed then
         %>
         <form method="post" action = "auction.asp">
           <input type="hidden" name="id" value='<%=oRS("id")%>'>
           <span style="color:#000">$<input type="text" name="bidamount" style="position:relative;top:0px;width:50px"> USD</span>
-          <span style="color:#000"><input type="submit" value="Submit Bid"></span><br><br>
+          <span style="color:#000"><input type="submit" value="Submit Your Bid"></span><br><br>
         </form>
         <%
-        else
+        elseif not closed then
         %>
         <a href="login.asp">Sign in</a> to bid
         <%
@@ -160,8 +180,8 @@ var x = setInterval(function() {
   var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
   // Display the result in the element with id="demo"
-  document.getElementById("demo").innerHTML = "Remaining " + days + "d " + hours + "h "
-  + minutes + "m " + seconds + "s ";
+  document.getElementById("demo").innerHTML = "<span style=color:blue>Remaining " + days + "d " + hours + "h "
+  + minutes + "m " + seconds + "s </span>";
 
   // If the count down is finished, write some text
   if (distance < 0) {
@@ -178,6 +198,4 @@ var x = setInterval(function() {
 
   </div>
   
-  <div style="position:relative;left:200px;top:100px">
     <!-- #include file="inc/footer.inc" -->
-  </div>

@@ -3,7 +3,7 @@
   <div class="shop">
   
     <div class="shoptitle">
-      <span style="font-size:26">Your Order History With priceBay</span>
+      <span style="font-size:26">Your <span onclick="window.location.href='orders.asp'"><u>Order History</u></span> With priceBay</span>
     </div>
 
     <p>
@@ -28,22 +28,24 @@
 
     dim sqlstr
 
-    dim username
+    dim orderid
 
-    username = session("username")
+    orderid = request.querystring("orderid")
 
-    sqlstr = "SELECT * FROM [order] WHERE username='"&username&"' ORDER BY orderid DESC"
+    sqlstr = "SELECT a.itemid, p.* FROM orderitems a INNER JOIN products p ON a.itemid = p.itemid WHERE a.orderid="&orderid
 
     set oRS = oConnection.Execute(sqlstr)
 
+    response.write "<h1>Order ID: " & orderid & "</h1>"
     %>
 
     <div style = "width:100%;float:left">
 
-    <div style="float:left;width:180px">order id</div>
-    <div style="float:left;width:180px">price</div>
-    <div>buy date</div>
-
+    <div style="float:left;width:180px">item id</div>
+    <div style="float:left;width:120px">price</div>
+    <div style="float:left;width:120px">category</div>
+    <div style="float:left;width:120px">image</div>
+    
     </div>
     
     <div style = "width:800px;float:left">
@@ -55,14 +57,10 @@
       %>
       <div style = "width:100%;float:left">
 
-      <div style="float:left;width:180px"><a href='orderitems.asp?orderid=<%=oRS("orderid")%>'%><%=oRS("orderid")%></div>
+      <div style="float:left;width:180px"><%=oRS("itemid")%></div>
       <div style="float:left;width:120px">$<%=oRS("price")%> USD</div>
-      <div>
-        <nobr>
-          <%=oRS("inputdate")%>
-        </nobr>
-
-      </div>
+      <div style="float:left;width:120px"><%=oRS("category")%></div>
+      <div style="float:left;width:120px"><img src='/productitems/<%=oRS("image")%>'></div>
 
       </div><br>
       <%

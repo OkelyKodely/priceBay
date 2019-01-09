@@ -15,11 +15,14 @@
 
   end if
 
+  %>
+  <h1>&nbsp;</h1>
+  <div class="login" style="float:left; width:100%">
+  <%
   if username = "" then
   %>
-  <div class="login">
     <div style="height:70px">
-  	  <span style="font-size:26;">Sign In</span>
+  	  <span style="font-size:26;">Buyer/Seller/Customer Sign In</span>
     </div>
   	<form method="post" action="">
   		<div style="float:left;width:90px">Username:</div>
@@ -27,11 +30,8 @@
   		<span><br></span>
   		<div style="float:left;width:90px">Password:</div>
   		<div style="loat:left"><input type="password" name="password"></div>
-  		<p></p>
-      <p></p>
-  		<input type="submit" value="Login" style="top:30px;width:200px;height:40px;position:relative;left:20px">
+  		<input type="submit" value="Login" style="top:30px;width:140px;height:40px;position:relative;left:0px">
   	</form>
-  </div>
 <%
 else
 
@@ -63,8 +63,18 @@ if not oRS.eof then
   end if
 end if
 %>
-	<span><br></span>
-	<span><br></span>
-<center>
+  </div>
+
+  <h1>&nbsp;</h1>
+  <h1>&nbsp;</h1>
+  <h1>&nbsp;</h1>
+  <h1>&nbsp;</h1>
+  <h1>&nbsp;</h1>
+
+<div style="position:relative;left:100px;width:900px;font-size:12px">
+*Ecommerce takes many forms. It is the sale and purchase of products and services via electronic systems. In some case the product or service may also be delivered via an electronic system, whereas in other cases the product or service will be delivered offline.
+<br><br>
+*Ecommerce may be be business-to-business (B2B), business-to-consumer (B2C) or consumer-to-consumer. The last of the categories of transaction will usually involve an ecommerce intermediary, such as eBay. Increasingly, B2B and B2C transactions are also mediated by third party platforms.
+</div>
+
   <!-- #include file="inc/footer.inc" -->
-</center>

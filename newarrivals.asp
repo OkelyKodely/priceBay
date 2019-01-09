@@ -1,24 +1,9 @@
   <!-- #include file="inc/header.inc" -->
-  <%
-  dim category
-
-  category = request.querystring("category")
-
-  response.redirect "shop.asp"
-
-  if category = "" then
-    category = "all"
-  end if
-  %>
   <div class="shop" style="float:left">
   
     <div class="shoptitle">
-      <span style="font-size:26">Shop</span>
-    </div>
-
-    <div class="shoptitle">
-      <span style="font-size:26"><img src="/graphics/images/20off.png"></span>
-    </div>
+      <span style="font-size:26">New Arrivals</span>
+    </div><br>
 
     <div class="categoryitems1">
       <%
@@ -102,18 +87,14 @@
 
     oConnection.Open "odbc1","sa","coppersink21"
     
-    set oRS = oConnection.Execute("SELECT * FROM products WHERE category='" & category & "' ORDER BY itemid DESC")
-
-    if category = "all" then
-      set oRS = oConnection.Execute("SELECT * FROM products ORDER BY itemid DESC")
-    end if
+    set oRS = oConnection.Execute("SELECT * FROM products WHERE newarrivals = 1 ORDER BY itemid DESC")
 
     dim count
     count = 0
 
     while not oRS.eof
 
-    if count mod 3 = 0 then
+    if count mod 4 = 0 then
     %>
       <div stylef = "width:100%;float:left">
     <%
@@ -129,7 +110,7 @@
       </p>
     </div>
     <%
-    if count mod 3 = 2 then
+    if count mod 4 = 3 then
     %>
       </div><br>
     <%
@@ -140,7 +121,7 @@
   count = count + 1
 wend
 
-if count mod 3 <> 2 then
+if count mod 4 <> 3 then
     %>
       </div>
     <%
