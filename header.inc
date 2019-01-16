@@ -1,5 +1,30 @@
+<%
+'openssl pkcs12 -export -out "certificate_combined.pfx" -inkey "private.key" -in "certificate.crt" -certfile ca_bundle.crt'
+If Request.ServerVariables("SERVER_PORT")=80 Then
+
+  Dim strSecureURL
+
+  strSecureURL = "https://"
+
+  strSecureURL = strSecureURL & Request.ServerVariables("SERVER_NAME")
+
+  strSecureURL = strSecureURL & Request.ServerVariables("URL")
+
+  Response.Redirect strSecureURL
+
+End If
+
+dim oConnection
+
+sConnection = "Dsn=odbc1;Integrated Security=True"
+
+set oConnection = server.createobject("ADODB.Connection")
+
+oConnection.Open "odbc1","sa","coppersink21"
+%>
 <html>
   <head>
+<link rel="stylesheet" href="https://www.jqueryscript.net/demo/Amazon-Like-Drop-Down-Menu-Plugin-with-jQuery-Menu-Aim/example/css/bootstrap.css" rel="stylesheet">
     <script>
 // When the user scrolls down 20px from the top of the document, show the button
 window.onscroll = function() {scrollFunction()};
@@ -21,12 +46,13 @@ function topFunction() {
     <style>
     	  body {
     		    font-family: arial;
-    		    color:#626262;
+    		    color:#000;
             background-color: white;
+            height:100%;
     	  }
         a {
             text-decoration: none;
-            color:#828282;
+            color:#000;
         }
         .signup {
             position:relative;
@@ -52,7 +78,7 @@ function topFunction() {
         }
         .categoryitems1 {
             position:relative;
-            top:-25px;
+            top:-125px;
             left:677px;
         }
         .shop {
@@ -60,14 +86,14 @@ function topFunction() {
             top:30px;
             left:100px;
             width:100%;
-            height:3000px;
+/*            height:3000px;*/
         }
         .shop1 {
             position:relative;
             top:30px;
             left:100px;
             width:100%;
-            height:3000px;
+/*            height:3000px;*/
         }
         .sell {
             position:relative;
@@ -77,6 +103,14 @@ function topFunction() {
             height:1000px;
         }
         .auction {
+            font-family:verdana;
+            position:relative;
+            top:0px;
+            left:100px;
+            width:500px;
+            height:800px;
+        }
+        .faq {
             font-family:verdana;
             position:relative;
             top:0px;
@@ -94,11 +128,9 @@ function topFunction() {
     	     	position:relative;
             color:white;
             background-color: black;
-            margin-top:100px;
-            top:300px;
+            top:0px;
         		left:0px;
             width:100%;
-            height:600px;
     	}
     	.nav {
     		position:relative;
@@ -127,18 +159,21 @@ function topFunction() {
     		height:700px;
     	}
     	.menuitem {
-            font-size:16px;
-    		float:left;
-    		height:25px;
-    		width:140px;
+        position:relative;
+        top:-140px;
+            margin-top:10px;
+            font-size:18px;
+        		float:left;
+        		height:45px;
+        		width:130px;
             text-align: center;
+            border-bottom:0px solid gray;
+            background-color:white;
     	}
       a:hover {
-          font-size:16px;
-          color:black;
+          color:#aa0000;
           height:25px;
           width:120px;
-          text-align: center;
       }
 
       .l-whyebay__wrapper{
@@ -155,10 +190,10 @@ function topFunction() {
         bottom: 20px; /* Place the button at the bottom of the page */
         right: 30px; /* Place the button 30px from the right */
         z-index: 99; /* Make sure it does not overlap */
-        border: none; /* Remove borders */
+        border: 1px solid black; /* Remove borders */
         outline: none; /* Remove outline */
-        background-color: green; /* Set a background color */
-        color: white; /* Text color */
+        background-color: #fff; /* Set a background color */
+        color: #000; /* Text color */
         cursor: pointer; /* Add a mouse pointer on hover */
         padding: 15px; /* Some padding */
         border-radius: 15px; /* Rounded corners */
@@ -166,33 +201,22 @@ function topFunction() {
       }
 
       #myBtn:hover {
-        background-color: #000000; /* Add a dark-grey background on hover */
+        color:black;
+        background-color: #ffffff; /* Add a white background on hover */
       }
     </style>
   </head>
 <body>
+  <div style="width:100%;background-color:#fff;margin-bottom:0px">
   <div class="nav">
-    <%if session("username") <> "" then%>
-    <div style="float:left; width: 600px; position:relative; left:0px">
-    <%else%>
-    <div style="float:left; width: 800px; position:relative; left:0px">
-    <%end if%>
+    <div style="float:left; width: 250px; position:relative; left:0px">
       <a href="/index.asp"><img src="/graphics/images/logo.bmp"></a>
     </div>
+    <div style="float:left; width: 720px; position:relative; left:0px;top:-5px">
+      &nbsp;<img src="/graphics/images/25off.png" height="10">
+    </div>
     <div>
-      <a onclick="window.location.href='cart.asp'">Your Cart |<span id="maxSb">+</span>|</a>
-      <div id="myDIV" style="text-align:center;border:1px solid #a0a0a0;display:none;z-index:2;position:absolute;top:20px;left:640px;background-color:white;color:black;width:260px;height:540px">
 <%
-    dim oConnectio
-
-    dim oRi
-
-    sConnectio = "Dsn=odbc1;Integrated Security=True"
-
-    set oConnectio = server.createobject("ADODB.Connection")
-
-    oConnectio.Open "odbc1","sa","coppersink21"
-
     dim carid
 
     carid = session("cartid")
@@ -215,11 +239,17 @@ function topFunction() {
 
     end if
 
+    dim countcart
+
+    countcart = 0
+
     if carid <> "" then
+
+        dim oRi
 
         str = "SELECT a.*, s.* FROM cart a INNER JOIN products s ON a.itemid = s.itemid WHERE a.cid = " & carid
 
-        set oRi = oConnectio.execute(str)
+        set oRi = oConnection.execute(str)
 
         dim tt
 
@@ -227,32 +257,24 @@ function topFunction() {
 
         while not oRi.eof
 
-            tt = tt + (100.00 - cdbl(oRi("discount")))*cdbl(oRi("price"))/100
-
             oRi.movenext
 
+            countcart = countcart + 1
+
         wend
-
-        %>
-        <br><br>SubTotal: $<%=tt%><br><br><br>
-        UPS Ground: $20<br><br><br>
-        Total: $<%=tt+20%><br><br><br>
-        <a href='buy.asp?t=<%=tt%>'><button style="width:150px; height:40px;">Checkout</button></a><br><br><br>
-        <a href='cart.asp'><button style="width:150px; height:40px;">See in Details</button></a><br><br>
-        <img src="/graphics/images/cards.png" width="100"><br><br>
-        <img src="/graphics/images/shipping.png">
-        <%
-
 
     end if
 
 %>
+      <a href="cart.asp"><img src="/graphics/images/carts.png" width="110" height="110"></a>
+      <!--<div id="ccount" style="position:relative;z-index:2;top:-55px;left:1000px"><%=countcart%> items</div>-->
+      <div id="myDIV" style="text-align:center;border:1px solid #a0a0a0;display:none;z-index:2;position:absolute;top:20px;left:640px;background-color:white;color:black;width:260px;height:540px">
       </div>
     </div>
   </div>
-  <div style="float:left; width:100%;position:relative;left:100px;top:20px">
+  <div style="float:right; width:100%;position:relative;left:800px;top:70px">
     <form method="get" action="shopresults.asp">
-      <span style="font-size:20px"><img src="/graphics/images/searchglass.png" width="50" height="40">Search: </span> <input type="text" name="query" id="searchbar" style="background-color:white;color:#22b14c;font-family:arial;font-size:18px;" value="[Type a keyword...]" onclick="this.value=''"> <input type="submit" value="Search Items">
+      <span style="font-size:20px;position:relative;top:-13px"><!--<img src="/graphics/images/searchglass.png" width="50" height="40">-->Search </span> <input type="text" name="query" id="searchbar" style="font-family:arial;font-size:14px;width:150px;height:30px;position:relative;top:-13px" onclick="this.value=''"> <input type="image" src="/graphics/images/s.png" border="0" name="submit" style="height:31px;width:120px;position:relative;top:-20px">
     </form>
   </div>
   <script>
@@ -270,18 +292,308 @@ function myFunction() {
 }
 
   </script>
-  <div class="menu" style="float:left">
-    <div class="menuitem"><a href="/shop.asp">Home</a></div>
-    <div class="menuitem"><a href="/categories.asp">Shop</a></div>
-    <div class="menuitem"><a href="/about.asp">About priceBay</a></div>
-    <div class="menuitem"><a href="/buyproducts.asp">Buy</a></div>
-    <div class="menuitem"><a href="/sell.asp">Sell</a></div>
+<style>
+.navbar .popover {
+width: 700px;
+-webkit-border-top-left-radius: 0px;
+-webkit-border-bottom-left-radius: 0px;
+border-top-left-radius: 0px;
+border-bottom-left-radius: 0px;
+overflow: hidden;
+}
+.navbar .popover-content {
+text-align: center;
+width: 700px;
+}
+.navbar .popover-content img {
+height: 212px;
+max-width: 450px;
+}
+.navbar .dropdown-menu {
+-webkit-border-top-right-radius: 0px;
+-webkit-border-bottom-right-radius: 0px;
+border-top-right-radius: 0px;
+border-bottom-right-radius: 0px;
+-webkit-box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+-moz-box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+width:600px;
+}
+.navbar .dropdown-menu > li > a:hover {
+background-image: none;
+color: white;
+background-color: rgb(0, 129, 194);
+background-color: rgba(0, 129, 194, 0.5);
+width:400px;
+}
+.navbar .dropdown-menu > li > a.maintainHover {
+color: white;
+background-color: #0081C2;
+width:400px;
+}
+</style>
+  <div class="menu" style="float:left;position:relative;top:80px">
+<style>
+    .styled {
+    border: 0;
+    line-height: 2.5;
+    padding: 0 20px;
+    font-size: 1rem;
+    text-align: center;
+    color: #fff;
+    text-shadow: 1px 1px 1px #000;
+    border-radius: 10px;
+    background-color: rgba(0, 220, 0, 1);
+    background-image: linear-gradient(to top left,
+                                      rgba(0, 0, 0, .2),
+                                      rgba(0, 0, 0, .2) 30%,
+                                      rgba(0, 0, 0, 0));
+    box-shadow: inset 2px 2px 3px rgba(255, 255, 255, .6),
+                inset -2px -2px 3px rgba(0, 0, 0, .6);
+}
+
+.styled:hover {
+    background-color: rgba(0, 255, 0, 1);
+}
+
+.styled:active {
+    box-shadow: inset -2px -2px 3px rgba(255, 255, 255, .6),
+                inset 2px 2px 3px rgba(0, 0, 0, .6);
+}
+</style>
+    <!--<div class="menuitem"><a href="/shop.asp">Home</a></div>-->
+    <div class="menuitem">
+<div class="nav-collapse collapse">
+<ul style="list-style-type: none">
+<li class="active"> 
+
+  <a class="dropdown-toggle" data-toggle="dropdown">Shop <img src="/graphics/images/downs.png"></a>
+<!--
+                  jQuery-menu-aim: this <ul> defines the dropdown main menu and its contents.
+                  This is just one of many possible examples for defining the menu's HTML.
+                  jQuery-menu-aim is agnostic to your HTML structure, it only fires events to
+                  be used as you please.
+                -->
+<ul class="dropdown-menu" role="menu" style="width:300px;text-align:left">
+<li data-submenu-id="submenu-patas"> <a href="shopcategories.asp?category=all#shophere">All</a> 
+<!--
+                          jQuery-menu-aim: each class="popover" div defines submenu content. There are a million
+                          and one ways to do this, places to structure the HTML, etc. This is just one example.
+                          jQuery-menu-aim is agnostic to your HTML structure, it only fires events to be used
+                          as you please.
+                        -->
+<div id="submenu-patas" class="popover">
+<h3 class="popover-title">All</h3>
+<div class="popover-content"><img src="img/patas.png"></div>
+</div>
+</li>
+<li data-submenu-id="submenu-fashion"> <a onmouseout="document.getElementById('submenu-fashion-1').style.display='none'" onmouseover="document.getElementById('submenu-fashion-1').style.display=''" href="shopcategories.asp?category=fashion#shophere">
+Fashion</a>
+<div id="submenu-fashion-1" style="display:none">
+<h3 class="popover-title">Fashion</h3>
+<div class="popover-content"><img src="/graphics/images/fashion-20-off.png"></div>
+</div>
+</li>
+<li data-submenu-id="submenu-kitchen"> <a onmouseout="document.getElementById('submenu-kitchen-1').style.display='none'" onmouseover="document.getElementById('submenu-kitchen-1').style.display=''" href="shopcategories.asp?category=kitchen#shophere">Kitchen</a>
+<div id="submenu-kitchen-1" style="display:none">
+<h3 class="popover-title">kitchen</h3>
+<div class="popover-content"><img src="/graphics/images/kitchen-upto-50-off.png"></div>
+</div>
+</li>
+<li data-submenu-id="submenu-software"> <a onmouseout="document.getElementById('submenu-software-1').style.display='none'" onmouseover="document.getElementById('submenu-software-1').style.display=''" href="shopcategories.asp?category=software#shophere">Software</a>
+<div id="submenu-software-1" style="display:none">
+<h3 class="popover-title">Software</h3>
+<div class="popover-content"><img src="/graphics/images/software.png"></div>
+</div>
+</li>
+<li data-submenu-id="submenu-computer"> <a onmouseout="document.getElementById('submenu-computer-1').style.display='none'" onmouseover="document.getElementById('submenu-computer-1').style.display=''" href="shopcategories.asp?category=computer#shophere">Computer</a>
+<div id="submenu-computer-1" style="display:none">
+<h3 class="popover-title">Computer</h3>
+<div class="popover-content"><img src="/graphics/images/computers.png"></div>
+</div>
+</li>
+<li data-submenu-id="submenu-other"> <a onmouseout="document.getElementById('submenu-other-1').style.display='none'" onmouseover="document.getElementById('submenu-other-1').style.display=''" href="shopcategories.asp?category=misc#shophere">Miscellaneous</a>
+<div id="submenu-other-1" style="display:none">
+<h3 class="popover-title">Miscellaneous</h3>
+<div class="popover-content"><img src="/graphics/images/otheritems.png"></div>
+</div>
+</li>
+<li data-submenu-id="submenu-motors"> <a onmouseout="document.getElementById('submenu-motors-1').style.display='none'" onmouseover="document.getElementById('submenu-motors-1').style.display=''" href="shopcategories.asp?category=motors#shophere">Motors</a>
+<div id="submenu-motors-1" style="display:none">
+<h3 class="popover-title">Motors</h3>
+<div class="popover-content"><img src="/graphics/images/motors.png"></div>
+</div>
+</li>
+<li data-submenu-id="submenu-electronics"> <a onmouseout="document.getElementById('submenu-electronics-1').style.display='none'" onmouseover="document.getElementById('submenu-electronics-1').style.display=''" href="shopcategories.asp?category=electronics#shophere">Electronics</a>
+<div id="submenu-electronics-1" style="display:none">
+<h3 class="popover-title">Electronics</h3>
+<div class="popover-content"><img src="/graphics/images/electronics.png"></div>
+</div>
+</li>
+<li data-submenu-id="submenu-collectibles"> <a onmouseout="document.getElementById('submenu-collectibles-1').style.display='none'" onmouseover="document.getElementById('submenu-collectibles-1').style.display=''" href="shopcategories.asp?category=collectibles#shophere">Collectibles & Art</a>
+<div id="submenu-collectibles-1" style="display:none">
+<h3 class="popover-title">Collectibles & Art</h3>
+<div class="popover-content"><img src="/graphics/images/collectibles.png"></div>
+</div>
+</li>
+<li data-submenu-id="submenu-home"> <a onmouseout="document.getElementById('submenu-home-1').style.display='none'" onmouseover="document.getElementById('submenu-home-1').style.display=''" href="shopcategories.asp?category=home#shophere">Home & Garden</a>
+<div id="submenu-home-1" style="display:none">
+<h3 class="popover-title">Home</h3>
+<div class="popover-content"><img src="/graphics/images/homeandgarden.png"></div>
+</div>
+</li>
+<li data-submenu-id="submenu-sporting"> <a onmouseout="document.getElementById('submenu-sporting-1').style.display='none'" onmouseover="document.getElementById('submenu-sporting-1').style.display=''" href="shopcategories.asp?category=sporting#shophere">Sporting Goods</a>
+<div id="submenu-sporting-1" style="display:none;">
+<h3 class="popover-title">Sporting Goods</h3>
+<div class="popover-content"><img src="/graphics/images/sgoods.png"></div>
+</div>
+</li>
+<li data-submenu-id="submenu-toys"> <a onmouseout="document.getElementById('submenu-toys-1').style.display='none'" onmouseover="document.getElementById('submenu-toys-1').style.display=''" href="shopcategories.asp?category=toys#shophere">Toys</a>
+<div id="submenu-toys-1" style="display:none">
+<h3 class="popover-title">Toys</h3>
+<div class="popover-content"><img src="/graphics/images/toys.png"></div>
+</div>
+</li>
+<li data-submenu-id="submenu-business"> <a onmouseout="document.getElementById('submenu-business-1').style.display='none'" onmouseover="document.getElementById('submenu-business-1').style.display=''" href="shopcategories.asp?category=business#shophere">Business & Industrial</a>
+<div id="submenu-business-1" style="display:none">
+<h3 class="popover-title">Business</h3>
+<div class="popover-content"><img src="/graphics/images/bindustrial.png"></div>
+</div>
+</li>
+<li data-submenu-id="submenu-music"> <a onmouseout="document.getElementById('submenu-music-1').style.display='none'" onmouseover="document.getElementById('submenu-music-1').style.display=''" href="shopcategories.asp?category=music#shophere">Music</a>
+<div id="submenu-music-1" style="display:none">
+<h3 class="popover-title">Music</h3>
+<div class="popover-content"><img src="/graphics/images/music.png"></div>
+</div>
+</li>
+<li data-submenu-id="submenu-deals"> <a onmouseout="document.getElementById('submenu-deals-1').style.display='none'" onmouseover="document.getElementById('submenu-deals-1').style.display=''" href="shopcategories.asp?category=deals#shophere">Deals</a>
+<div id="submenu-deals-1" style="display:none">
+<h3 class="popover-title">Deals</h3>
+<div class="popover-content"><img src="/graphics/images/deals.png"></div>
+</div>
+</li>
+<li data-submenu-id="submenu-under10"> <a onmouseout="document.getElementById('submenu-under10-1').style.display='none'" onmouseover="document.getElementById('submenu-under10-1').style.display=''" href="shopcategories.asp?category=under10#shophere">Under $10</a>
+<div id="submenu-under10-1" style="display:none">
+<h3 class="popover-title">Under $10</h3>
+<div class="popover-content"><img src="/graphics/images/under10.png"></div>
+</div>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<script src="https://www.jqueryscript.net/demo/Amazon-Like-Drop-Down-Menu-Plugin-with-jQuery-Menu-Aim/example/js/jquery-1.9.1.min.js"></script> 
+<script src="https://www.jqueryscript.net/demo/Amazon-Like-Drop-Down-Menu-Plugin-with-jQuery-Menu-Aim/example/jquery.menu-aim.js"></script> 
+<script src="https://www.jqueryscript.net/demo/Amazon-Like-Drop-Down-Menu-Plugin-with-jQuery-Menu-Aim/example/js/bootstrap.min.js"></script> 
+<script>
+
+        var $menu = $(".dropdown-menu");
+
+        // jQuery-menu-aim: <meaningful part of the example>
+        // Hook up events to be fired on menu row activation.
+        $menu.menuAim({
+            activate: activateSubmenu,
+            deactivate: deactivateSubmenu
+        });
+        // jQuery-menu-aim: </meaningful part of the example>
+
+        // jQuery-menu-aim: the following JS is used to show and hide the submenu
+        // contents. Again, this can be done in any number of ways. jQuery-menu-aim
+        // doesn't care how you do this, it just fires the activate and deactivate
+        // events at the right times so you know when to show and hide your submenus.
+        function activateSubmenu(row) {
+            var $row = $(row),
+                submenuId = $row.data("submenuId"),
+                $submenu = $("#" + submenuId),
+                height = $menu.outerHeight(),
+                width = $menu.outerWidth();
+
+                $submenu.style.display = "";
+
+
+            // Show the submenu
+            $submenu.css({
+                display: "block",
+                top: -1,
+                left: 300,  // main should overlay submenu
+                height: 300  // padding for main dropdown's arrow
+            });
+
+            // Keep the currently activated row's highlighted look
+            $row.find("a").addClass("maintainHover");
+        }
+
+        function deactivateSubmenu(row) {
+            var $row = $(row),
+                submenuId = $row.data("submenuId"),
+                $submenu = $("#" + submenuId);
+
+            // Hide the submenu and remove the row's highlighted look
+            $submenu.css("display", "none");
+            $row.find("a").removeClass("maintainHover");
+        }
+
+        $(document).click(function() {
+            // Simply hide the submenu on any click. Again, this is just a hacked
+            // together menu/submenu structure to show the use of jQuery-menu-aim.
+            $(".popover").css("display", "none");
+            $("a.maintainHover").removeClass("maintainHover");
+        });
+
+    </script>
+    <div class="menuitem" onclick="window.location.href='/about.asp'">
+      <button class="favorite styled"
+              type="button">
+            <a href="/about.asp" style="color:white">About</a>
+      </button>
+    </div>
+    <div class="menuitem" onclick="window.location.href='/buyproducts.asp'">
+      <button class="favorite styled"
+              type="button">
+            <a href="/buyproducts.asp" style="color:white">Buy</a>
+      </button>
+    </div>
+    <div class="menuitem" onclick="window.location.href='/sell.asp'">
+      <button class="favorite styled"
+              type="button">
+            <a href="/sell.asp" style="color:white">Sell</a>
+      </button>
+    </div>
+    <div class="menuitem" onclick="window.location.href='/cart.asp'">
+      <button class="favorite styled"
+              type="button">
+            <a href="/cart.asp" style="color:white">Cart</a>
+      </button>
+    </div>
+    <div class="menuitem" onclick="window.location.href='/contact.asp'">
+      <button class="favorite styled"
+              type="button">
+            <a href="/contact.asp" style="color:white">Contact</a>
+      </button>
+    </div>
     <%if session("username") <> "" then%>
+    <div class="menuitem" onclick="window.location.href='/logout.asp'">
+      <button class="favorite styled"
+              type="button">
+            <a href="/logout.asp" style="color:white">Sign Out</a>
+      </button>
+    </div>
     <%else%>
-    <div class="menuitem"><a href="/signup.asp"><nobr>Sign Up</nobr></a></div>
-    <div class="menuitem"><a href="/login.asp">Sign In</a></div>
+    <div class="menuitem" onclick="window.location.href='/login.asp'">
+      <button class="favorite styled"
+              type="button">
+            <a href="/login.asp" style="color:white">Sign In</a>
+      </button>
+    </div>
     <%end if%>
-    <div class="menuitem"><a href="/contact.asp">Contact</a></div>
+    <div class="menuitem" onclick="window.location.href='/signup.asp'">
+      <button class="favorite styled"
+              type="button">
+            <a href="/signup.asp" style="color:white">Sign Up</a>
+      </button>
+    </div>
     <p>
         <br>
     </p>
@@ -289,14 +601,370 @@ function myFunction() {
         &nbsp;
     </p>
   </div>
+
   <h1>&nbsp;</h1>
   <h1>&nbsp;</h1>
-  <div style="position:relative;left:100px">
+      <div class="categoryitems1" style="float:left;top:-50px;left:900px">
+      <%
+      dim category
+
+      category = request.querystring("category")
+
+      if category = "" then
+        category = "all"
+      end if
+
+      if category = "all" then
+      %>
+      Find <img src="/graphics/images/triple-arrow.png" width="48" height="24"> <select name="category" id="category" onchange="window.location.href='shopcategories.asp?category='+this.value+'#shophere'" style="height:40px;font-size:14px">
+        <option value="all" selected>Everything</option>
+        <option value="fashion">Fashion</option>
+        <option value="kitchen">Kitchen</option>
+        <option value="software">Software</option>
+        <option value="computer">Computer</option>
+        <option value="misc">Miscellaneous</option>
+        <option value="motors">Motors</option>
+        <option value="electronics">Electronics</option>
+        <option value="collectibles">Collectibles & Art</option>
+        <option value="home">Home & Garden</option>
+        <option value="sporting">Sporting Goods</option>
+        <option value="toys">Toys</option>
+        <option value="business">Business & Industrial</option>
+        <option value="music">Music</option>
+        <option value="deals">Deals</option>
+        <option value="under10">Under $10</option>
+      </select>
+      <%
+      elseif category = "fashion" then
+      %>
+      Find <img src="/graphics/images/triple-arrow.png" width="48" height="24"> <select name="category" id="category" onchange="window.location.href='shopcategories.asp?category='+this.value+'#shophere'" style="height:40px;font-size:14px">
+        <option value="all">Everything</option>
+        <option value="fashion" selected>Fashion</option>
+        <option value="kitchen">Kitchen</option>
+        <option value="software">Software</option>
+        <option value="computer">Computer</option>
+        <option value="misc">Miscellaneous</option>
+        <option value="motors">Motors</option>
+        <option value="electronics">Electronics</option>
+        <option value="collectibles">Collectibles & Art</option>
+        <option value="home">Home & Garden</option>
+        <option value="sporting">Sporting Goods</option>
+        <option value="toys">Toys</option>
+        <option value="business">Business & Industrial</option>
+        <option value="music">Music</option>
+        <option value="deals">Deals</option>
+        <option value="under10">Under $10</option>
+      </select>
+      <%
+      elseif category = "kitchen" then
+      %>
+      Find <img src="/graphics/images/triple-arrow.png" width="48" height="24"> <select name="category" id="category" onchange="window.location.href='shopcategories.asp?category='+this.value+'#shophere'" style="height:40px;font-size:14px">
+        <option value="all">Everything</option>
+        <option value="fashion">Fashion</option>
+        <option value="kitchen" selected>Kitchen</option>
+        <option value="software">Software</option>
+        <option value="computer">Computer</option>
+        <option value="misc">Miscellaneous</option>
+        <option value="motors">Motors</option>
+        <option value="electronics">Electronics</option>
+        <option value="collectibles">Collectibles & Art</option>
+        <option value="home">Home & Garden</option>
+        <option value="sporting">Sporting Goods</option>
+        <option value="toys">Toys</option>
+        <option value="business">Business & Industrial</option>
+        <option value="music">Music</option>
+        <option value="deals">Deals</option>
+        <option value="under10">Under $10</option>
+      </select>
+      <%
+      elseif category = "software" then
+      %>
+      Find <img src="/graphics/images/triple-arrow.png" width="48" height="24"> <select name="category" id="category" onchange="window.location.href='shopcategories.asp?category='+this.value+'#shophere'" style="height:40px;font-size:14px">
+        <option value="all">Everything</option>
+        <option value="fashion">Fashion</option>
+        <option value="kitchen">Kitchen</option>
+        <option value="software" selected>Software</option>
+        <option value="computer">Computer</option>
+        <option value="misc">Miscellaneous</option>
+        <option value="motors">Motors</option>
+        <option value="electronics">Electronics</option>
+        <option value="collectibles">Collectibles & Art</option>
+        <option value="home">Home & Garden</option>
+        <option value="sporting">Sporting Goods</option>
+        <option value="toys">Toys</option>
+        <option value="business">Business & Industrial</option>
+        <option value="music">Music</option>
+        <option value="deals">Deals</option>
+        <option value="under10">Under $10</option>
+      </select>
+      <%
+      elseif category = "computer" then
+      %>
+      Find <img src="/graphics/images/triple-arrow.png" width="48" height="24"> <select name="category" id="category" onchange="window.location.href='shopcategories.asp?category='+this.value+'#shophere'" style="height:40px;font-size:14px">
+        <option value="all">Everything</option>
+        <option value="fashion">Fashion</option>
+        <option value="kitchen">Kitchen</option>
+        <option value="software" selected>Software</option>
+        <option value="computer">Computer</option>
+        <option value="misc">Miscellaneous</option>
+        <option value="motors">Motors</option>
+        <option value="electronics">Electronics</option>
+        <option value="collectibles">Collectibles & Art</option>
+        <option value="home">Home & Garden</option>
+        <option value="sporting">Sporting Goods</option>
+        <option value="toys">Toys</option>
+        <option value="business">Business & Industrial</option>
+        <option value="music">Music</option>
+        <option value="deals">Deals</option>
+        <option value="under10">Under $10</option>
+      </select>
+      <%
+      elseif category = "misc" then
+      %>
+      Find <img src="/graphics/images/triple-arrow.png" width="48" height="24"> <select name="category" id="category" onchange="window.location.href='shopcategories.asp?category='+this.value+'#shophere'" style="height:40px;font-size:14px">
+        <option value="all">Everything</option>
+        <option value="fashion">Fashion</option>
+        <option value="kitchen">Kitchen</option>
+        <option value="software">Software</option>
+        <option value="computer">Computer</option>
+        <option value="misc" selected>Miscellaneous</option>
+        <option value="motors">Motors</option>
+        <option value="electronics">Electronics</option>
+        <option value="collectibles">Collectibles & Art</option>
+        <option value="home">Home & Garden</option>
+        <option value="sporting">Sporting Goods</option>
+        <option value="toys">Toys</option>
+        <option value="business">Business & Industrial</option>
+        <option value="music">Music</option>
+        <option value="deals">Deals</option>
+        <option value="under10">Under $10</option>
+      </select>
+      <%
+      elseif category = "motors" then
+      %>
+      Find <img src="/graphics/images/triple-arrow.png" width="48" height="24"> <select name="category" id="category" onchange="window.location.href='shopcategories.asp?category='+this.value+'#shophere'" style="height:40px;font-size:14px">
+        <option value="all">Everything</option>
+        <option value="fashion">Fashion</option>
+        <option value="kitchen">Kitchen</option>
+        <option value="software">Software</option>
+        <option value="computer">Computer</option>
+        <option value="misc">Miscellaneous</option>
+        <option value="motors" selected>Motors</option>
+        <option value="electronics">Electronics</option>
+        <option value="collectibles">Collectibles & Art</option>
+        <option value="home">Home & Garden</option>
+        <option value="sporting">Sporting Goods</option>
+        <option value="toys">Toys</option>
+        <option value="business">Business & Industrial</option>
+        <option value="music">Music</option>
+        <option value="deals">Deals</option>
+        <option value="under10">Under $10</option>
+      </select>
+      <%
+      elseif category = "electronics" then
+      %>
+      Find <img src="/graphics/images/triple-arrow.png" width="48" height="24"> <select name="category" id="category" onchange="window.location.href='shopcategories.asp?category='+this.value+'#shophere'" style="height:40px;font-size:14px">
+        <option value="all">Everything</option>
+        <option value="fashion">Fashion</option>
+        <option value="kitchen">Kitchen</option>
+        <option value="software">Software</option>
+        <option value="computer">Computer</option>
+        <option value="misc">Miscellaneous</option>
+        <option value="motors">Motors</option>
+        <option value="electronics" selected>Electronics</option>
+        <option value="collectibles">Collectibles & Art</option>
+        <option value="home">Home & Garden</option>
+        <option value="sporting">Sporting Goods</option>
+        <option value="toys">Toys</option>
+        <option value="business">Business & Industrial</option>
+        <option value="music">Music</option>
+        <option value="deals">Deals</option>
+        <option value="under10">Under $10</option>
+      </select>
+      <%
+      elseif category = "collectibles" then
+      %>
+      Find <img src="/graphics/images/triple-arrow.png" width="48" height="24"> <select name="category" id="category" onchange="window.location.href='shopcategories.asp?category='+this.value+'#shophere'" style="height:40px;font-size:14px">
+        <option value="all">Everything</option>
+        <option value="fashion">Fashion</option>
+        <option value="kitchen">Kitchen</option>
+        <option value="software">Software</option>
+        <option value="computer">Computer</option>
+        <option value="misc">Miscellaneous</option>
+        <option value="motors">Motors</option>
+        <option value="electronics">Electronics</option>
+        <option value="collectibles" selected>Collectibles & Art</option>
+        <option value="home">Home & Garden</option>
+        <option value="sporting">Sporting Goods</option>
+        <option value="toys">Toys</option>
+        <option value="business">Business & Industrial</option>
+        <option value="music">Music</option>
+        <option value="deals">Deals</option>
+        <option value="under10">Under $10</option>
+      </select>
+      <%
+      elseif category = "home" then
+      %>
+      Find <img src="/graphics/images/triple-arrow.png" width="48" height="24"> <select name="category" id="category" onchange="window.location.href='shopcategories.asp?category='+this.value+'#shophere'" style="height:40px;font-size:14px">
+        <option value="all">Everything</option>
+        <option value="fashion">Fashion</option>
+        <option value="kitchen">Kitchen</option>
+        <option value="software">Software</option>
+        <option value="computer">Computer</option>
+        <option value="misc">Miscellaneous</option>
+        <option value="motors">Motors</option>
+        <option value="electronics">Electronics</option>
+        <option value="collectibles">Collectibles & Art</option>
+        <option value="home" selected>Home & Garden</option>
+        <option value="sporting">Sporting Goods</option>
+        <option value="toys">Toys</option>
+        <option value="business">Business & Industrial</option>
+        <option value="music">Music</option>
+        <option value="deals">Deals</option>
+        <option value="under10">Under $10</option>
+      </select>
+      <%
+      elseif category = "sporting" then
+      %>
+      Find <img src="/graphics/images/triple-arrow.png" width="48" height="24"> <select name="category" id="category" onchange="window.location.href='shopcategories.asp?category='+this.value+'#shophere'" style="height:40px;font-size:14px">
+        <option value="all">Everything</option>
+        <option value="fashion">Fashion</option>
+        <option value="kitchen">Kitchen</option>
+        <option value="software">Software</option>
+        <option value="computer">Computer</option>
+        <option value="misc">Miscellaneous</option>
+        <option value="motors">Motors</option>
+        <option value="electronics">Electronics</option>
+        <option value="collectibles">Collectibles & Art</option>
+        <option value="home">Home & Garden</option>
+        <option value="sporting" selected>Sporting Goods</option>
+        <option value="toys">Toys</option>
+        <option value="business">Business & Industrial</option>
+        <option value="music">Music</option>
+        <option value="deals">Deals</option>
+        <option value="under10">Under $10</option>
+      </select>
+      <%
+      elseif category = "toys" then
+      %>
+      Find <img src="/graphics/images/triple-arrow.png" width="48" height="24"> <select name="category" id="category" onchange="window.location.href='shopcategories.asp?category='+this.value+'#shophere'" style="height:40px;font-size:14px">
+        <option value="all">Everything</option>
+        <option value="fashion">Fashion</option>
+        <option value="kitchen">Kitchen</option>
+        <option value="software">Software</option>
+        <option value="computer">Computer</option>
+        <option value="misc">Miscellaneous</option>
+        <option value="motors">Motors</option>
+        <option value="electronics">Electronics</option>
+        <option value="collectibles">Collectibles & Art</option>
+        <option value="home">Home & Garden</option>
+        <option value="sporting">Sporting Goods</option>
+        <option value="toys" selected>Toys</option>
+        <option value="business">Business & Industrial</option>
+        <option value="music">Music</option>
+        <option value="deals">Deals</option>
+        <option value="under10">Under $10</option>
+      </select>
+      <%
+      elseif category = "business" then
+      %>
+      Find <img src="/graphics/images/triple-arrow.png" width="48" height="24"> <select name="category" id="category" onchange="window.location.href='shopcategories.asp?category='+this.value+'#shophere'" style="height:40px;font-size:14px">
+        <option value="all">Everything</option>
+        <option value="fashion">Fashion</option>
+        <option value="kitchen">Kitchen</option>
+        <option value="software">Software</option>
+        <option value="computer">Computer</option>
+        <option value="misc">Miscellaneous</option>
+        <option value="motors">Motors</option>
+        <option value="electronics">Electronics</option>
+        <option value="collectibles">Collectibles & Art</option>
+        <option value="home">Home & Garden</option>
+        <option value="sporting">Sporting Goods</option>
+        <option value="toys">Toys</option>
+        <option value="business" selected>Business & Industrial</option>
+        <option value="music">Music</option>
+        <option value="deals">Deals</option>
+        <option value="under10">Under $10</option>
+      </select>
+      <%
+      elseif category = "music" then
+      %>
+      Find <img src="/graphics/images/triple-arrow.png" width="48" height="24"> <select name="category" id="category" onchange="window.location.href='shopcategories.asp?category='+this.value+'#shophere'" style="height:40px;font-size:14px">
+        <option value="all">Everything</option>
+        <option value="fashion">Fashion</option>
+        <option value="kitchen">Kitchen</option>
+        <option value="software">Software</option>
+        <option value="computer">Computer</option>
+        <option value="misc">Miscellaneous</option>
+        <option value="motors">Motors</option>
+        <option value="electronics">Electronics</option>
+        <option value="collectibles">Collectibles & Art</option>
+        <option value="home">Home & Garden</option>
+        <option value="sporting">Sporting Goods</option>
+        <option value="toys">Toys</option>
+        <option value="business">Business & Industrial</option>
+        <option value="music" selected>Music</option>
+        <option value="deals">Deals</option>
+        <option value="under10">Under $10</option>
+      </select>
+      <%
+      elseif category = "deals" then
+      %>
+      Find <img src="/graphics/images/triple-arrow.png" width="48" height="24"> <select name="category" id="category" onchange="window.location.href='shopcategories.asp?category='+this.value+'#shophere'" style="height:40px;font-size:14px">
+        <option value="all">Everything</option>
+        <option value="fashion">Fashion</option>
+        <option value="kitchen">Kitchen</option>
+        <option value="software">Software</option>
+        <option value="computer">Computer</option>
+        <option value="misc">Miscellaneous</option>
+        <option value="motors">Motors</option>
+        <option value="electronics">Electronics</option>
+        <option value="collectibles">Collectibles & Art</option>
+        <option value="home">Home & Garden</option>
+        <option value="sporting">Sporting Goods</option>
+        <option value="toys">Toys</option>
+        <option value="business">Business & Industrial</option>
+        <option value="music">Music</option>
+        <option value="deals" selected>Deals</option>
+        <option value="under10">Under $10</option>
+      </select>
+      <%
+      elseif category = "under10" then
+      %>
+      Find <img src="/graphics/images/triple-arrow.png" width="48" height="24"> <select name="category" id="category" onchange="window.location.href='shopcategories.asp?category='+this.value+'#shophere'" style="height:40px;font-size:14px">
+        <option value="all">Everything</option>
+        <option value="fashion">Fashion</option>
+        <option value="kitchen">Kitchen</option>
+        <option value="software">Software</option>
+        <option value="computer">Computer</option>
+        <option value="misc">Miscellaneous</option>
+        <option value="motors">Motors</option>
+        <option value="electronics">Electronics</option>
+        <option value="collectibles">Collectibles & Art</option>
+        <option value="home">Home & Garden</option>
+        <option value="sporting">Sporting Goods</option>
+        <option value="toys">Toys</option>
+        <option value="business">Business & Industrial</option>
+        <option value="music">Music</option>
+        <option value="deals">Deals</option>
+        <option value="under10" selected>Under $10</option>
+      </select>
+      <%
+      end if
+      %>
+    </div>
+
+  <div style="width:100%;float:left;">
+  <div style="position:relative;left:112px;top:-140px">
 <%
   if session("username") <> "" then
-    Response.Write "Hi <a href=""/orders.asp""><u>" & session("username") & "</u></a>, welcome! <a href='logout.asp'><span style='color:green'>Logout</span></a>"
+    Response.Write "Hi <a href=""/orders.asp""><u>" & session("username") & "</u></a>. Welcome <a href='logout.asp'><span style='color:green'>Sign Out</span></a>"
+  else
+    Response.Write "Hi. <a href=""/login.asp""><u>Sign in</u></a> or <a href=""/signup.asp""><u>Sign up</u></a>"
   end if
 %>
   </div>
+  </div>
+</div>
 
    <button onclick="topFunction()" id="myBtn" title="Go to top">Top</button> 

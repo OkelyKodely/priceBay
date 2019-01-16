@@ -55,7 +55,6 @@
   dim username
   dim password
   dim pusername
-  dim ppassword
   dim address
   dim city
   dim stateorprovince
@@ -63,13 +62,13 @@
   dim phone
   dim fax
   dim email
+  dim subscribe
 
   firstname = request.form("firstname")
   lastname = request.form("lastname")
   username = request.form("username")
   password = request.form("password")
   pusername = request.form("pusername")
-  ppassword = request.form("ppassword")
   address = request.form("address")
   city = request.form("city")
   stateorprovince = request.form("stateorprovince")
@@ -77,33 +76,52 @@
   phone = request.form("phone")
   fax = request.form("fax")
   email = request.form("email")
+  subscribe = request.form("subscribe")
 
   if firstname <> "" then
-    dim oConnection
-
-    dim oRS
-
-    sConnection = "Dsn=odbc1;Integrated Security=True"
-
-    set oConnection = server.createobject("ADODB.Connection")
-
-    oConnection.Open "odbc1","sa","coppersink21"
-    
     dim sqlstr
 
-    sqlstr = "INSERT INTO shoppers (firstname, lastname, username, password, address, city, stateorprovince, country, phone, fax, email, paypal_user, paypal_pw) VALUES ('"&firstname&"','"&lastname&"','"&username&"','"&password&"','"&address&"','"&city&"','"&stateorprovince&"','"&country&"','"&phone&"','"&fax&"','"&email&"','"&pusername&"','"&ppassword&"')"
+    dim oRs
 
-    oConnection.Execute(sqlstr)
+    sqlstr = "SELECT * FROM shoppers WHERE email = '"&email&"'"
 
-    response.write "Registered!"
+    set oRs = oConnection.Execute(sqlstr)
+
+    if oRs.eof then
+
+      if subscribe = "checked" then
+
+        subscribe = 1
+
+      else
+
+        subscribe = ""
+
+      end if
+
+      sqlstr = "INSERT INTO shoppers (subscribe, firstname, lastname, username, password, address, city, stateorprovince, country, phone, fax, email, paypal_user) VALUES ("&subscribe&",'"&firstname&"','"&lastname&"','"&username&"','"&password&"','"&address&"','"&city&"','"&stateorprovince&"','"&country&"','"&phone&"','"&fax&"','"&email&"','"&pusername&"')"
+
+      oConnection.Execute(sqlstr)
+
+      response.write "Registered!"
+
+    else
+    %>
+    <script>
+      alert('Account for email <%=email%> already exists.');
+    </script>
+    <%
+    end if
 
   end if
   %>
 
-  <div class="signup" style="float:left">
+  <div class="signup" style="float:left;position:relative;top:-100px">
     <div style="height:60px">
-      <span style="font-size:26;">Sign Up</span><br>
-      <span style="font-size:12;">Sign up is free for all customers and there is no charge to get your products listed if you are selling or buying too.  Purchases are subject to terms and condition on the Terms of Service (TOS).</span>
+      <div>
+      <span style="font-size:36;">Sign Up</span><br>
+    </div>
+      <span style="position:relative;left:500px;top:0px"><img src="/graphics/images/signup-for-free.png"></span><br>
     </div>
   	<form method="post" id="frm" action="" onsubmit="return validateThenSubmit()">
       <div style="float:left;width:140px">First Name:</div>
@@ -120,9 +138,6 @@
   		<span><br></span>
       <div style="float:left;width:140px">Paypal Username:</div>
       <div style="loat:left"><input type="text" id="pusername" name="pusername"></div>
-      <span><br></span>
-      <div style="float:left;width:140px">Paypal Password:</div>
-      <div style="loat:left"><input type="password" name="ppassword"></div>
       <span><br></span>
       <div style="float:left;width:140px">Address:</div>
       <div style="loat:left"><input type="text" name="address"></div>
@@ -144,7 +159,10 @@
       <span><br></span>
       <div style="float:left;width:140px">Email:</div>
       <div style="loat:left"><input type="text" id="email" name="email"></div>
-      <p>&nbsp;</p>
+      <span><br></span>
+      <div style="float:left;width:140px">Subscribe:</div>
+      <div style="loat:left"><input type="checkbox" id="subscribe" name="subscribe"> Subscribe</div>
+      <p>You are given the option to subscribe to our marketing material.  By clicking on Subscribe you agree to receive information from us regarding our products and services.</p>
   		<input type="submit" value="Sign Up" style="width:290px; height:50px; position: relative; left: 0px">
   	</form>
   </div>
@@ -160,11 +178,5 @@
   <h1>&nbsp;</h1>
   <h1>&nbsp;</h1>
   <h1>&nbsp;</h1>
-
-<div style="position:relative;left:100px;width:900px;font-size:12px">
-*Ecommerce takes many forms. It is the sale and purchase of products and services via electronic systems. In some case the product or service may also be delivered via an electronic system, whereas in other cases the product or service will be delivered offline.
-<br><br>
-*Ecommerce may be be business-to-business (B2B), business-to-consumer (B2C) or consumer-to-consumer. The last of the categories of transaction will usually involve an ecommerce intermediary, such as eBay. Increasingly, B2B and B2C transactions are also mediated by third party platforms.
-</div>
 
   <!-- #include file="inc/footer.inc" -->

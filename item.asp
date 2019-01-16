@@ -1,27 +1,11 @@
   <!-- #include file="inc/header.inc" -->
   <%
-  dim category
-
-  category = request.querystring("category")
-
-  if category = "" then
-    category = "all"
-  end if
-
-    dim oConnection
-
     dim oRS
 
     dim itemid
 
     itemid = request.querystring("itemid")
     
-    sConnection = "Dsn=odbc1;Integrated Security=True"
-
-    set oConnection = server.createobject("ADODB.Connection")
-
-    oConnection.Open "odbc1","sa","coppersink21"
-
     sqlstr = "SELECT * FROM products WHERE itemid='" & itemid & "'"
 
     set oRS = oConnection.Execute(sqlstr)
@@ -30,15 +14,15 @@
       category = oRS("category")
     end if
   %>
-  <div class="shop">
+  <div class="shop" style="position:relative;top:-70px">
   
     <div class="shoptitle">
   	  <span style="font-size:26">Shop | <%=category%></span>
     </div>
 
-    <div class="categoryitems">
+    <!--<div class="categoryitems">
       <a href="categories.asp">Shop Categories</a>
-    </div>
+    </div>-->
     <%
     dim cartid
 
@@ -151,16 +135,18 @@ function imageZoom(imgID, resultID) {
   }
 }
 </script>
+
 <div class="img-zoom-container" style="width:100%;float:left">
   <div style="float:left">
     <img id="myimage" src='/productitems/<%=oRS("image")%>' width="300" height="240">
   </div>
   <div style="float:left;position:relative;left:60px">
     <div id="myresult" class="img-zoom-result"></div>
+    <span style="font-size:24px">Zoom</span>
   </div>
 </div>
         <script>imageZoom("myimage", "myresult"); </script>
-          <br><p style="width:350px">Title: <%=oRS("name")%></p>
+          <br><p style="width:350px">Name: <%=oRS("name")%></p>
       </div>
       <div id = "right" style = "float:left; width: 350;">
         <span style="color:#000">Description:</span>
@@ -168,7 +154,7 @@ function imageZoom(imgID, resultID) {
         <span style="color:#ff0000"><strikeout>Price:</strikeout></span>
         <span style="color:#ff0000"><strikeout>$<%=oRS("price")%></strikeout></span><br><br>
         <span style="color:#000">Discount Price:</span>
-        $<%=(100-cdbl(oRS("discount")))*cdbl(oRS("price"))/100%> !!~~<br><br>
+        <b>$<%=(100-cdbl(oRS("discount")))*cdbl(oRS("price"))/100%></b><br><br>
         <form method="post" action="cart.asp">
           <input type="hidden" name="itemid" value=<%=oRS("itemid")%>>
           <input type="submit" value="Add To cart" style="width:200px; height:40px">
@@ -181,4 +167,14 @@ function imageZoom(imgID, resultID) {
 
   </div>
   <h1>&nbsp;</h1>  
+  <h1>&nbsp;</h1>  
+  <h1>&nbsp;</h1>  
+  <h1>&nbsp;</h1>  
+  <h1>&nbsp;</h1>  
+  <h1>&nbsp;</h1>  
+
+  <%
+  oConnection.close()
+  %>
+    
     <!-- #include file="inc/footer.inc" -->

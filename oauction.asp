@@ -1,13 +1,4 @@
   <!-- #include file="inc/header.inc" -->
-  <%
-  dim category
-
-  category = request.querystring("category")
-
-  if category = "" then
-    category = "all"
-  end if
-  %>
   <h1>&nbsp;</h1>
   <div class="shop">
   
@@ -19,16 +10,6 @@
     dim cartid
 
     cartid = session("cartid")
-
-    dim oConnection
-
-    dim oRS
-
-    sConnection = "Dsn=odbc1;Integrated Security=True"
-
-    set oConnection = server.createobject("ADODB.Connection")
-
-    oConnection.Open "odbc1","sa","coppersink21"
 
     dim itemid
 
@@ -65,6 +46,10 @@
   %>
 
   </div>
+
+<%
+oConnection.close()
+%>
   
   <div style="position:relative;left:200px;top:100px">
     <!-- #include file="inc/footer.inc" -->

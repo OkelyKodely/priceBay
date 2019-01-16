@@ -1,20 +1,14 @@
   <!-- #include file="inc/header.inc" -->
-  <%
-  dim category
+  <div class="shop1" style="width:100%;position:relative;top:30px">
 
-  category = request.querystring("category")
-
-  if category = "" then
-    category = "all"
-  end if
-  %>
-  <div class="shop1" style="width:100%">
-  
-    <div class="shoptitle" style="height:260px;position:relative;top:0px">
-      <span style="font-size:26;"><img src="/graphics/images/20off.png" height="200"></span>
+<!--  
+  <div style="width:1500px;float:left;height:200px;position:relative;top:-60px">
+    <div class="shoptitle" style="float:left;height:260px;position:relative;top:0px">
+      <span style="font-size:26;">    <a href="sell.asp"><img src="/graphics/images/sellonebay.png"></a>&nbsp;&nbsp;<a href="categories.asp"><img src="/graphics/images/20off.png"></a>
+</span>
     </div>
-
-  <div style="float:left">
+  </div>-->
+  <div style="float:left;position:relative;top:-100px">
 <div>Shop Categories</div>
 <hr>
 <a href="shop.asp?category=all#shophere">All</a><br><br>
@@ -35,371 +29,19 @@
 <a href="shop.asp?category=under10#shophere">Under $10</a>
 </div>
 
-    <div class="categoryitems" style="float:left">
-      <%
-      if category = "all" then
-      %>
-      Shop Categories: <select name="category" id="category" onchange="window.location.href='?category='+this.value+'#shophere'" style="height:20px;font-size:14px">
-        <option value="all" selected>Everything</option>
-        <option value="fashion">Fashion</option>
-        <option value="kitchen">Kitchen</option>
-        <option value="software">Software</option>
-        <option value="computer">Computer</option>
-        <option value="misc">Miscellaneous</option>
-        <option value="motors">Motors</a><br><br>
-        <option value="electronics">Electronics</a><br><br>
-        <option value="collectibles">Collectibles & Art</a><br><br>
-        <option value="home">Home & Garden</a><br><br>
-        <option value="sporting">Sporting Goods</a><br><br>
-        <option value="toys">Toys</a><br><br>
-        <option value="business">Business & Industrial</a><br><br>
-        <option value="music">Music</a><br><br>
-        <option value="deals">Deals</a><br><br>
-        <option value="under10">Under $10</a>
-      </select>
-      <%
-      elseif category = "fashion" then
-      %>
-      Shop Categories: <select name="category" id="category" onchange="window.location.href='?category='+this.value+'#shophere'" style="height:20px;font-size:14px">
-        <option value="all">Everything</option>
-        <option value="fashion" selected>Fashion</option>
-        <option value="kitchen">Kitchen</option>
-        <option value="software">Software</option>
-        <option value="computer">Computer</option>
-        <option value="misc">Miscellaneous</option>
-        <option value="motors">Motors</a><br><br>
-        <option value="electronics">Electronics</a><br><br>
-        <option value="collectibles">Collectibles & Art</a><br><br>
-        <option value="home">Home & Garden</a><br><br>
-        <option value="sporting">Sporting Goods</a><br><br>
-        <option value="toys">Toys</a><br><br>
-        <option value="business">Business & Industrial</a><br><br>
-        <option value="music">Music</a><br><br>
-        <option value="deals">Deals</a><br><br>
-        <option value="under10">Under $10</a>
-      </select>
-      <%
-      elseif category = "kitchen" then
-      %>
-      Shop Categories: <select name="category" id="category" onchange="window.location.href='?category='+this.value+'#shophere'" style="height:20px;font-size:14px">
-        <option value="all">Everything</option>
-        <option value="fashion">Fashion</option>
-        <option value="kitchen" selected>Kitchen</option>
-        <option value="software">Software</option>
-        <option value="computer">Computer</option>
-        <option value="misc">Miscellaneous</option>
-        <option value="motors">Motors</a><br><br>
-        <option value="electronics">Electronics</a><br><br>
-        <option value="collectibles">Collectibles & Art</a><br><br>
-        <option value="home">Home & Garden</a><br><br>
-        <option value="sporting">Sporting Goods</a><br><br>
-        <option value="toys">Toys</a><br><br>
-        <option value="business">Business & Industrial</a><br><br>
-        <option value="music">Music</a><br><br>
-        <option value="deals">Deals</a><br><br>
-        <option value="under10">Under $10</a>
-      </select>
-      <%
-      elseif category = "software" then
-      %>
-      Shop Categories: <select name="category" id="category" onchange="window.location.href='?category='+this.value+'#shophere'" style="height:20px;font-size:14px">
-        <option value="all">Everything</option>
-        <option value="fashion">Fashion</option>
-        <option value="kitchen">Kitchen</option>
-        <option value="software" selected>Software</option>
-        <option value="computer">Computer</option>
-        <option value="misc">Miscellaneous</option>
-        <option value="motors">Motors</a><br><br>
-        <option value="electronics">Electronics</a><br><br>
-        <option value="collectibles">Collectibles & Art</a><br><br>
-        <option value="home">Home & Garden</a><br><br>
-        <option value="sporting">Sporting Goods</a><br><br>
-        <option value="toys">Toys</a><br><br>
-        <option value="business">Business & Industrial</a><br><br>
-        <option value="music">Music</a><br><br>
-        <option value="deals">Deals</a><br><br>
-        <option value="under10">Under $10</a>
-      </select>
-      <%
-      elseif category = "computer" then
-      %>
-      Shop Categories: <select name="category" id="category" onchange="window.location.href='?category='+this.value+'#shophere'" style="height:20px;font-size:14px">
-        <option value="all">Everything</option>
-        <option value="fashion">Fashion</option>
-        <option value="kitchen">Kitchen</option>
-        <option value="software" selected>Software</option>
-        <option value="computer">Computer</option>
-        <option value="misc">Miscellaneous</option>
-        <option value="motors">Motors</a><br><br>
-        <option value="electronics">Electronics</a><br><br>
-        <option value="collectibles">Collectibles & Art</a><br><br>
-        <option value="home">Home & Garden</a><br><br>
-        <option value="sporting">Sporting Goods</a><br><br>
-        <option value="toys">Toys</a><br><br>
-        <option value="business">Business & Industrial</a><br><br>
-        <option value="music">Music</a><br><br>
-        <option value="deals">Deals</a><br><br>
-        <option value="under10">Under $10</a>
-      </select>
-      <%
-      elseif category = "misc" then
-      %>
-      Shop Categories: <select name="category" id="category" onchange="window.location.href='?category='+this.value+'#shophere'" style="height:20px;font-size:14px">
-        <option value="all">Everything</option>
-        <option value="fashion">Fashion</option>
-        <option value="kitchen">Kitchen</option>
-        <option value="software">Software</option>
-        <option value="computer">Computer</option>
-        <option value="misc" selected>Miscellaneous</option>
-        <option value="motors">Motors</a><br><br>
-        <option value="electronics">Electronics</a><br><br>
-        <option value="collectibles">Collectibles & Art</a><br><br>
-        <option value="home">Home & Garden</a><br><br>
-        <option value="sporting">Sporting Goods</a><br><br>
-        <option value="toys">Toys</a><br><br>
-        <option value="business">Business & Industrial</a><br><br>
-        <option value="music">Music</a><br><br>
-        <option value="deals">Deals</a><br><br>
-        <option value="under10">Under $10</a>
-      </select>
-      <%
-      elseif category = "motors" then
-      %>
-      Shop Categories: <select name="category" id="category" onchange="window.location.href='?category='+this.value+'#shophere'" style="height:20px;font-size:14px">
-        <option value="all">Everything</option>
-        <option value="fashion">Fashion</option>
-        <option value="kitchen">Kitchen</option>
-        <option value="software">Software</option>
-        <option value="computer">Computer</option>
-        <option value="misc">Miscellaneous</option>
-        <option value="motors" selected>Motors</a><br><br>
-        <option value="electronics">Electronics</a><br><br>
-        <option value="collectibles">Collectibles & Art</a><br><br>
-        <option value="home">Home & Garden</a><br><br>
-        <option value="sporting">Sporting Goods</a><br><br>
-        <option value="toys">Toys</a><br><br>
-        <option value="business">Business & Industrial</a><br><br>
-        <option value="music">Music</a><br><br>
-        <option value="deals">Deals</a><br><br>
-        <option value="under10">Under $10</a>
-      </select>
-      <%
-      elseif category = "electronics" then
-      %>
-      Shop Categories: <select name="category" id="category" onchange="window.location.href='?category='+this.value+'#shophere'" style="height:20px;font-size:14px">
-        <option value="all">Everything</option>
-        <option value="fashion">Fashion</option>
-        <option value="kitchen">Kitchen</option>
-        <option value="software">Software</option>
-        <option value="computer">Computer</option>
-        <option value="misc">Miscellaneous</option>
-        <option value="motors">Motors</a><br><br>
-        <option value="electronics" selected>Electronics</a><br><br>
-        <option value="collectibles">Collectibles & Art</a><br><br>
-        <option value="home">Home & Garden</a><br><br>
-        <option value="sporting">Sporting Goods</a><br><br>
-        <option value="toys">Toys</a><br><br>
-        <option value="business">Business & Industrial</a><br><br>
-        <option value="music">Music</a><br><br>
-        <option value="deals">Deals</a><br><br>
-        <option value="under10">Under $10</a>
-      </select>
-      <%
-      elseif category = "collectibles" then
-      %>
-      Shop Categories: <select name="category" id="category" onchange="window.location.href='?category='+this.value+'#shophere'" style="height:20px;font-size:14px">
-        <option value="all">Everything</option>
-        <option value="fashion">Fashion</option>
-        <option value="kitchen">Kitchen</option>
-        <option value="software">Software</option>
-        <option value="computer">Computer</option>
-        <option value="misc">Miscellaneous</option>
-        <option value="motors">Motors</a><br><br>
-        <option value="electronics">Electronics</a><br><br>
-        <option value="collectibles" selected>Collectibles & Art</a><br><br>
-        <option value="home">Home & Garden</a><br><br>
-        <option value="sporting">Sporting Goods</a><br><br>
-        <option value="toys">Toys</a><br><br>
-        <option value="business">Business & Industrial</a><br><br>
-        <option value="music">Music</a><br><br>
-        <option value="deals">Deals</a><br><br>
-        <option value="under10">Under $10</a>
-      </select>
-      <%
-      elseif category = "home" then
-      %>
-      Shop Categories: <select name="category" id="category" onchange="window.location.href='?category='+this.value+'#shophere'" style="height:20px;font-size:14px">
-        <option value="all">Everything</option>
-        <option value="fashion">Fashion</option>
-        <option value="kitchen">Kitchen</option>
-        <option value="software">Software</option>
-        <option value="computer">Computer</option>
-        <option value="misc">Miscellaneous</option>
-        <option value="motors">Motors</a><br><br>
-        <option value="electronics">Electronics</a><br><br>
-        <option value="collectibles">Collectibles & Art</a><br><br>
-        <option value="home" selected>Home & Garden</a><br><br>
-        <option value="sporting">Sporting Goods</a><br><br>
-        <option value="toys">Toys</a><br><br>
-        <option value="business">Business & Industrial</a><br><br>
-        <option value="music">Music</a><br><br>
-        <option value="deals">Deals</a><br><br>
-        <option value="under10">Under $10</a>
-      </select>
-      <%
-      elseif category = "sporting" then
-      %>
-      Shop Categories: <select name="category" id="category" onchange="window.location.href='?category='+this.value+'#shophere'" style="height:20px;font-size:14px">
-        <option value="all">Everything</option>
-        <option value="fashion">Fashion</option>
-        <option value="kitchen">Kitchen</option>
-        <option value="software">Software</option>
-        <option value="computer">Computer</option>
-        <option value="misc">Miscellaneous</option>
-        <option value="motors">Motors</a><br><br>
-        <option value="electronics">Electronics</a><br><br>
-        <option value="collectibles">Collectibles & Art</a><br><br>
-        <option value="home">Home & Garden</a><br><br>
-        <option value="sporting" selected>Sporting Goods</a><br><br>
-        <option value="toys">Toys</a><br><br>
-        <option value="business">Business & Industrial</a><br><br>
-        <option value="music">Music</a><br><br>
-        <option value="deals">Deals</a><br><br>
-        <option value="under10">Under $10</a>
-      </select>
-      <%
-      elseif category = "toys" then
-      %>
-      Shop Categories: <select name="category" id="category" onchange="window.location.href='?category='+this.value+'#shophere'" style="height:20px;font-size:14px">
-        <option value="all">Everything</option>
-        <option value="fashion">Fashion</option>
-        <option value="kitchen">Kitchen</option>
-        <option value="software">Software</option>
-        <option value="computer">Computer</option>
-        <option value="misc">Miscellaneous</option>
-        <option value="motors">Motors</a><br><br>
-        <option value="electronics">Electronics</a><br><br>
-        <option value="collectibles">Collectibles & Art</a><br><br>
-        <option value="home">Home & Garden</a><br><br>
-        <option value="sporting">Sporting Goods</a><br><br>
-        <option value="toys" selected>Toys</a><br><br>
-        <option value="business">Business & Industrial</a><br><br>
-        <option value="music">Music</a><br><br>
-        <option value="deals">Deals</a><br><br>
-        <option value="under10">Under $10</a>
-      </select>
-      <%
-      elseif category = "business" then
-      %>
-      Shop Categories: <select name="category" id="category" onchange="window.location.href='?category='+this.value+'#shophere'" style="height:20px;font-size:14px">
-        <option value="all">Everything</option>
-        <option value="fashion">Fashion</option>
-        <option value="kitchen">Kitchen</option>
-        <option value="software">Software</option>
-        <option value="computer">Computer</option>
-        <option value="misc">Miscellaneous</option>
-        <option value="motors">Motors</a><br><br>
-        <option value="electronics">Electronics</a><br><br>
-        <option value="collectibles">Collectibles & Art</a><br><br>
-        <option value="home">Home & Garden</a><br><br>
-        <option value="sporting">Sporting Goods</a><br><br>
-        <option value="toys">Toys</a><br><br>
-        <option value="business" selected>Business & Industrial</a><br><br>
-        <option value="music">Music</a><br><br>
-        <option value="deals">Deals</a><br><br>
-        <option value="under10">Under $10</a>
-      </select>
-      <%
-      elseif category = "music" then
-      %>
-      Shop Categories: <select name="category" id="category" onchange="window.location.href='?category='+this.value+'#shophere'" style="height:20px;font-size:14px">
-        <option value="all">Everything</option>
-        <option value="fashion">Fashion</option>
-        <option value="kitchen">Kitchen</option>
-        <option value="software">Software</option>
-        <option value="computer">Computer</option>
-        <option value="misc">Miscellaneous</option>
-        <option value="motors">Motors</a><br><br>
-        <option value="electronics">Electronics</a><br><br>
-        <option value="collectibles">Collectibles & Art</a><br><br>
-        <option value="home">Home & Garden</a><br><br>
-        <option value="sporting">Sporting Goods</a><br><br>
-        <option value="toys">Toys</a><br><br>
-        <option value="business">Business & Industrial</a><br><br>
-        <option value="music" selected>Music</a><br><br>
-        <option value="deals">Deals</a><br><br>
-        <option value="under10">Under $10</a>
-      </select>
-      <%
-      elseif category = "deals" then
-      %>
-      Shop Categories: <select name="category" id="category" onchange="window.location.href='?category='+this.value+'#shophere'" style="height:20px;font-size:14px">
-        <option value="all">Everything</option>
-        <option value="fashion">Fashion</option>
-        <option value="kitchen">Kitchen</option>
-        <option value="software">Software</option>
-        <option value="computer">Computer</option>
-        <option value="misc">Miscellaneous</option>
-        <option value="motors">Motors</a><br><br>
-        <option value="electronics">Electronics</a><br><br>
-        <option value="collectibles">Collectibles & Art</a><br><br>
-        <option value="home">Home & Garden</a><br><br>
-        <option value="sporting">Sporting Goods</a><br><br>
-        <option value="toys">Toys</a><br><br>
-        <option value="business">Business & Industrial</a><br><br>
-        <option value="music">Music</a><br><br>
-        <option value="deals" selected>Deals</a><br><br>
-        <option value="under10">Under $10</a>
-      </select>
-      <%
-      elseif category = "under10" then
-      %>
-      Shop Categories: <select name="category" id="category" onchange="window.location.href='?category='+this.value+'#shophere'" style="height:20px;font-size:14px">
-        <option value="all">Everything</option>
-        <option value="fashion">Fashion</option>
-        <option value="kitchen">Kitchen</option>
-        <option value="software">Software</option>
-        <option value="computer">Computer</option>
-        <option value="misc">Miscellaneous</option>
-        <option value="motors">Motors</a><br><br>
-        <option value="electronics">Electronics</a><br><br>
-        <option value="collectibles">Collectibles & Art</a><br><br>
-        <option value="home">Home & Garden</a><br><br>
-        <option value="sporting">Sporting Goods</a><br><br>
-        <option value="toys">Toys</a><br><br>
-        <option value="business">Business & Industrial</a><br><br>
-        <option value="music">Music</a><br><br>
-        <option value="deals">Deals</a><br><br>
-        <option value="under10" selected>Under $10</a>
-      </select>
-      <%
-      end if
-      %>
-    </div>
-
     <%
-    dim oConnection
-
-    dim oRS
-
-    sConnection = "Dsn=odbc1;Integrated Security=True"
-
-    set oConnection = server.createobject("ADODB.Connection")
-
-    oConnection.Open "odbc1","sa","coppersink21"
-
     if category = "all" then
     %>
-    <div style="position:relative;left:50px">
+    <div style="position:relative;left:50px;top:-100px">
     <%
     else
     %>
-    <div style="position:relative;left:50px">
+    <div style="position:relative;left:50px;top:-100px">
     <%
     end if
     %>
-    <div class="shoptitle" style="position:relative;left:-300px">
-      <span style="font-size:26">New Auctions</span>
+    <div class="shoptitle" style="position:relative;left:-0px">
+      <span style="font-size:26">Daily Deals</span>
     </div>
     <div>
     <%
@@ -410,7 +52,7 @@
     b = request("b")
 
     a = 1
-    b = 6
+    b = 12
 
     dim ssql
 
@@ -435,7 +77,7 @@
 
     while not oRS.eof
 
-    if count mod 3 = 0 then
+    if count mod 12 = 0 then
     %>
       <div style = "width:100%;">
       <%
@@ -451,26 +93,25 @@
       closed = true
 
     %>
-    <div style = "float:left; width: 250; height: 300">
-        <a href='auction.asp?id=<%=oRS("id")%>'><img src='/productitems/<%=oRS("image")%>' width="150" height="150"></a>
+    <div style = "float:left; width: 180; height: 240">
+        <a href='auction.asp?id=<%=oRS("id")%>'><img src='/productitems/<%=oRS("image")%>' width="130" height="130"></a>
         <br><a href='auction.asp?id=<%=oRS("id")%>'><%=oRS("name")%></a>
         <br>Opened for: <%=oRS("duration")%> days
     </div>
     <%
     else
     %>
-    <div style = "float:left; width: 250; height: 300">
-        <img src='/productitems/<%=oRS("image")%>' width="150" height="150">
+    <div style = "float:left; width: 180; height: 240">
+        <img src='/productitems/<%=oRS("image")%>' width="130" height="130">
         <br><%=oRS("name")%>
         <br><span style="color:red">Auction closed</span>
     </div>
     <%
     end if
 
-    if count mod 3 = 2 then
+    if count mod 12 = 11 then
     didit = true
     %>
-      <a href=buyproducts.asp>more...</a>
 
       </div><br>
     <%
@@ -481,10 +122,11 @@
   count = count + 1
 wend
 
-if count mod 3 <> 2 and not didit then
+if count mod 3 <> 2 then
     %>
-      <a href=buyproducts.asp>more...</a>
-
+    <div style = "float:left; width: 260; height: 300">
+      <a href=buyproducts.asp><img src="/graphics/images/more.png"></a>
+    </div>
       </div>
     <%
 end if
@@ -495,36 +137,57 @@ end if
 
 </div>
 
-    <div class="shoptitle" style="width:100%;float:left;position:relative;top:60px;lef:100px;">
+    <div class="shoptitle" style="width:100%;float:left;position:relative;top:-50px;left:100px;">
       <span style="font-size:26"><a href="newarrivals.asp">New Arrivals</a></span>
       <hr>
     </div>
     <h1>&nbsp;</h1>
 <%
-    set oRS = oConnection.Execute("SELECT * FROM products WHERE newarrivals=1 ORDER BY itemid DESC")
+    a = 1
+
+    b = 3
+
+    ssql = "WITH sellProds AS "
+
+    ssql = ssql & "("
+    ssql = ssql & "    SELECT *,"
+    ssql = ssql & "    ROW_NUMBER() OVER (ORDER BY itemid DESC) AS 'RowNumber'"
+    ssql = ssql & "    FROM products WHERE newarrivals = 1"
+    ssql = ssql & ") "
+    ssql = ssql & "SELECT * "
+    ssql = ssql & "FROM sellProds "
+    ssql = ssql & "WHERE RowNumber BETWEEN "&a&" AND "&b&";"
+
+    set oRS = oConnection.Execute(ssql)
 
     count = 0
 
     while not oRS.eof
 
-    if count mod 4 = 0 then
+    if count mod 3 = 0 then
     %>
-      <div style = "float:left;position:relative;top:60px;lef:100px">
+      <div style = "float:left;position:relative;top:0px;left:100px">
     <%
     end if
     %>
-    <div style = "float:left; width: 200px; height: 200px">
+    <div style = "float:left; width: 260px; height: 250px">
       <div>
-        <a href='item.asp?itemid=<%=oRS("itemid")%>'><img src='/productitems/<%=oRS("image")%>' width="150" height="100"></a>
+        <a href='item.asp?itemid=<%=oRS("itemid")%>'><img src='/productitems/<%=oRS("image")%>' width="200" height="200"></a>
       </div>
       <div>
         <a style="" href='item.asp?itemid=<%=oRS("itemid")%>'><%=oRS("name")%></a>
       </div>
     </div>
     <%
-    if count mod 4 = 3 then
+    if count mod 3 = 2 then
     %>
       </div>
+    <div style = "float:left; width: 260px; height: 250px; position:relative;left:100px">
+      <div style = "width: 250px; height: 230px">
+      <a href=newarrivals.asp><img src="/graphics/images/more.png"></a>
+      </div>
+    </div>
+
     <%
     end if
     %>
@@ -533,7 +196,7 @@ end if
   count = count + 1
 wend
 
-if count mod 4 <> 3 then
+if count mod 3 <> 2 then
     %>
       </div>
     <%
@@ -543,7 +206,7 @@ end if
 
     <h1>&nbsp;</h1>
     <a name="shophere"></a>
-    <div class="shoptitle" style="float:left;width:1200px;position:relative;top:140px;left:100px;">
+    <div class="shoptitle" style="float:left;width:1200px;position:relative;top:50px;left:100px;">
       <a href='shopcategories.asp?category=<%=category%>'><span style="font-size:26">Shop <%=category%></span></a>
       <hr>
     </div>
@@ -582,21 +245,21 @@ end if
 
     if count mod 8 = 0 then
     %>
-      <div style = "width:900px;float:left;position:relative;top:140px;left:100px">
+      <div style = "width:1200px;float:left;position:relative;top:50px;left:100px">
     <%
     if count = 0 then
     %>
-      <div stylef = "width:800px;float:left;position:relative;left:-100px">
-      <div style = "float:left; width: 50px; height: 300px">
+      <div stylef = "width:1200px;float:left;position:relative;left:-100px">
+      <div style = "float:left; width: 50px; height: 30px">
       <a href='shop.asp?c=<%=c-8%>&d=<%=d-8%>#shophere'>less...</a>
     </div>
     <%
     end if
     end if
     %>
-    <div style = "float:left; width: 200px; height: 200px">
+    <div style = "float:left; width: 260px; height: 300px">
       <div>
-        <a href='item.asp?itemid=<%=oRS("itemid")%>'><img src='/productitems/<%=oRS("image")%>' width="150" height="100"></a>
+        <a href='item.asp?itemid=<%=oRS("itemid")%>'><img src='/productitems/<%=oRS("image")%>' width="200" height="200"></a>
       </div>
       <div>
         <a style="" href='item.asp?itemid=<%=oRS("itemid")%>'><%=oRS("name")%></a>
@@ -605,8 +268,8 @@ end if
     <%
     if count = d - 1 then
 %>
-      <div style = "float:left; width: 50px; height: 300px">
-      <a href='shop.asp?c=<%=c+8%>&d=<%=d+8%>#shophere'>more...</a>
+      <div style = "float:left; width: 50px; height: 30px">
+      <a href='shop.asp?c=<%=c+8%>&d=<%=d+8%>#shophere'><img src="/graphics/images/more.png"></a>
       </div>
 <%
     end if
@@ -632,10 +295,38 @@ oConnection.close()
 %>
 
   </div>
+
   <h1>&nbsp;</h1>  
   <h1>&nbsp;</h1>  
   <h1>&nbsp;</h1>  
   <h1>&nbsp;</h1>  
   <h1>&nbsp;</h1>  
   <h1>&nbsp;</h1>  
+  <h1>&nbsp;</h1>  
+  <h1>&nbsp;</h1>  
+  <h1>&nbsp;</h1>  
+  <h1>&nbsp;</h1>  
+  <h1>&nbsp;</h1>  
+  <h1>&nbsp;</h1>  
+
+  <h1>&nbsp;</h1>  
+  <h1>&nbsp;</h1>  
+  <h1>&nbsp;</h1>  
+  <h1>&nbsp;</h1>  
+  <h1>&nbsp;</h1>  
+  <h1>&nbsp;</h1>  
+  <h1>&nbsp;</h1>  
+  <h1>&nbsp;</h1>  
+  <h1>&nbsp;</h1>  
+
+  <h1>&nbsp;</h1>  
+  <h1>&nbsp;</h1>  
+  <h1>&nbsp;</h1>  
+  <h1>&nbsp;</h1>  
+  <h1>&nbsp;</h1>  
+  <h1>&nbsp;</h1>  
+  <h1>&nbsp;</h1>  
+  <h1>&nbsp;</h1>  
+  <h1>&nbsp;</h1>  
+
     <!-- #include file="inc/footer.inc" -->

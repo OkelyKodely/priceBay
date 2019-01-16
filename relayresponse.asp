@@ -57,7 +57,7 @@ end if
 
 sqlstr = "INSERT INTO [order] (username, price, inputdate, s_address, s_city, s_state, s_zipcode, s_country) VALUES "
 sqlstr = sqlstr & "('"&username&"',"&Amount&",getDate(),'"&s_address&"','"&s_city&"','"&s_state&"','"&s_zipcode&"','"&s_country&"')"
-
+response.write sqlstr
 oConnection.Execute(sqlstr)
 
 sqlstr = "SELECT orderid FROM [order] ORDER BY orderid DESC"
@@ -92,6 +92,8 @@ end if
 sqlstr = "DELETE FROM cart WHERE cid = " & cartid
 
 oConnection.Execute(sqlstr)
+
+oConnection.close()
 
 dim objMail 
 Set objMail = Server.CreateObject("CDO.Message") 

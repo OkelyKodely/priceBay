@@ -1,79 +1,82 @@
   <!-- #include file="inc/header.inc" -->
-  <%
-  dim category
-
-  category = request.querystring("category")
-
-  if category = "" then
-    category = "all"
-  end if
-  %>
-  <div class="shop" style="float:left">
+  <div class="shop" style="float:left;position:relative;top:-70px">
   
     <div class="shoptitle">
-      <span style="font-size:26">Shop Categories | <%=category%></span>
+      <span style="font-size:36">Shop</span>
     </div><br>
 
     <a href="shopcategories.asp?category=all">Shop All Categories</a>
     <br>
 
-    <div style="width:900px">
-    <div style="width: 100%;height:220px">
+    <div style="width:1000px">
+    <div style="width: 100%;height:270px;float:left">
       <div style="float: left;width:280px;height:220px">
-        <a href="shopcategories.asp?category=fashion"><img src="/graphics/images/fashion-20-off.png" width="250" height="200"></a>
+        <a href="shopcategories.asp?category=fashion#shophere"><img src="/graphics/images/fashion-20-off.png" width="250" height="200"></a>
       </div>
       <div style="float: left;width:280px">
-        <a href="shopcategories.asp?category=kitchen"><img src="/graphics/images/kitchen-upto-50-off.png" width="250" height="200"></a>
+        <a href="shopcategories.asp?category=kitchen#shophere"><img src="/graphics/images/kitchen-upto-50-off.png" width="250" height="200"></a>
       </div>
       <div style="float: left;width:280px">
-        <a href="shopcategories.asp?category=misc"><img src="/graphics/images/otheritems.png" width="250" height="200"></a>
+        <a href="shopcategories.asp?category=misc#shophere"><img src="/graphics/images/otheritems.png" width="250" height="200"></a>
       </div>
     </div>
 
-    <div style="width: 100%;height:100px">
+    <div style="width: 100%;height:270px;float:left">
       <div style="float:left;width:280px;height:220px">
-        <a href="shopcategories.asp?category=software"><img src="/graphics/images/software.png" width="250" height="200"></a>
+        <a href="shopcategories.asp?category=software#shophere"><img src="/graphics/images/software.png" width="250" height="200"></a>
       </div>
       <div style="float:left;width:280px;height:220px">
-        <a href="shopcategories.asp?category=computer"><img src="/graphics/images/computers.png" width="250" height="200"></a>
+        <a href="shopcategories.asp?category=computer#shophere"><img src="/graphics/images/computers.png" width="250" height="200"></a>
       </div>
       <div style="float:left;width:280px;height:220px">
-        <a href="shopcategories.asp?category=motors"><img src="/graphics/images/motors.png" width="250" height="200"></a>
+        <a href="shopcategories.asp?category=motors#shophere"><img src="/graphics/images/motors.png" width="250" height="200"></a>
       </div>
     </div>
 
-    <div style="width: 100%;height:100px">
+    <div style="width: 100%;height:270px;float:left">
       <div style="float:left;width:280px;height:220px">
-        <a href="shopcategories.asp?category=electronics"><img src="/graphics/images/electronics.png" width="250" height="200"></a>
+        <a href="shopcategories.asp?category=electronics#shophere"><img src="/graphics/images/electronics.png" width="250" height="200"></a>
       </div>
       <div style="float:left;width:280px;height:220px">
-        <a href="shopcategories.asp?category=collectibles"><img src="/graphics/images/collectibles.png" width="250" height="200"></a>
+        <a href="shopcategories.asp?category=collectibles#shophere"><img src="/graphics/images/collectibles.png" width="250" height="200"></a>
       </div>
       <div style="float:left;width:280px;height:220px">
-        <a href="shopcategories.asp?category=homeandgarden"><img src="/graphics/images/homeandgarden.png" width="250" height="200"></a>
+        <a href="shopcategories.asp?category=homeandgarden#shophere"><img src="/graphics/images/homeandgarden.png" width="250" height="200"></a>
+      </div>
+    </div>
+
+    <div style="width: 100%;height:270px;float:left">
+      <div style="float:left;width:280px;height:220px">
+        <a href="shopcategories.asp?category=sporting#shophere"><img src="/graphics/images/sgoods.png" width="250" height="200"></a>
+      </div>
+      <div style="float:left;width:280px;height:220px">
+        <a href="shopcategories.asp?category=toys#shophere"><img src="/graphics/images/toys.png" width="250" height="200"></a>
+      </div>
+      <div style="float:left;width:280px;height:220px">
+        <a href="shopcategories.asp?category=business#shophere"><img src="/graphics/images/bindustrial.png" width="250" height="200"></a>
+      </div>
+    </div>
+
+    <div style="width: 100%;height:270px;float:left">
+      <div style="float:left;width:280px;height:220px">
+        <a href="shopcategories.asp?category=music#shophere"><img src="/graphics/images/music.png" width="250" height="200"></a>
+      </div>
+      <div style="float:left;width:280px;height:220px">
+        <a href="shopcategories.asp?category=deals#shophere"><img src="/graphics/images/deals.png" width="250" height="200"></a>
+      </div>
+      <div style="float:left;width:280px;height:220px">
+        <a href="shopcategories.asp?category=under10#shophere"><img src="/graphics/images/under10.png" width="250" height="200"></a>
       </div>
     </div>
     </div>
 
-    <div style="height:300px;">
-      <h1>&nbsp;</h1>
-    </div>
-
-    <div>
-      <h1>Shop</h1>
+    <div style="float:left; width:100%">
+      <a name="shophere" />
+      <br><br>
+      <h1>Shop <%=category%></h1>
     </div>
 
     <%
-    dim oConnection
-
-    dim oRS
-
-    sConnection = "Dsn=odbc1;Integrated Security=True"
-
-    set oConnection = server.createobject("ADODB.Connection")
-
-    oConnection.Open "odbc1","sa","coppersink21"
-    
     dim a, b
 
     a = request("a")

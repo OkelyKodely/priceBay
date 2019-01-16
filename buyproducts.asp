@@ -1,34 +1,20 @@
   <!-- #include file="inc/header.inc" -->
-  <%
-  dim category
-
-  category = request.querystring("category")
-
-  if category = "" then
-    category = "all"
-  end if
-  %>
   <h1>&nbsp;</h1>
-  <div class="auction1">
+  <div class="auction1" style="position:relative;top:-100px">
   
     <div class="shoptitle">
-      <span style="font-size:26">Current Auctions</span>
+      <span style="font-size:36">Daily Deals</span>
     </div>
-  <h1>&nbsp;</h1>
 
-<div class="l-b2c__title">All you need is a paypal account to purchase items</div>
-<img src="/graphics/images/ppez.png">
+    <p>
+      &nbsp;
+    </p>
+
+<div class="l-b2c__title" style="font-size:20px">All you need to begin purchasing items is to have a free priceBay account and a paypal account upon sign up</div>
+<!--<img src="/graphics/images/ppez.png">-->
 
     <%
-    dim oConnection
-
-    dim oRS
-
-    sConnection = "Dsn=odbc1;Integrated Security=True"
-
-    set oConnection = server.createobject("ADODB.Connection")
-
-    oConnection.Open "odbc1","sa","coppersink21"
+    Server.ScriptTimeout = 1000
 
     dim ssql
 
@@ -42,7 +28,7 @@
 
       c = 1
 
-      d = 4
+      d = 21
 
     end if
     
@@ -64,13 +50,13 @@
 
     while not oRS.eof
 
-    if count mod 3 = 0 then
+    if count mod 21 = 0 then
     %>
       <div stylef = "width:100%;float:left">
 <%
       if count = 0 then
 %>
-      <div style = "float:left; width: 50px; height: 300px">
+      <div style = "float:left; width: 50px; height: 30px">
       <a href='buyproducts.asp?c=<%=c-4%>&d=<%=d-4%>'>less...</a>
       </div>
 <%
@@ -88,8 +74,8 @@
       closed = true
 
     %>
-    <div style = "float:left; width: 250; height: 300">
-        <a href='auction.asp?id=<%=oRS("id")%>'><img src='/productitems/<%=oRS("image")%>' width="150" height="150"></a>
+    <div style = "float:left; width: 160; height: 230">
+        <a href='auction.asp?id=<%=oRS("id")%>'><img src='/productitems/<%=oRS("image")%>' width="100" height="100"></a>
         <br><a href='auction.asp?id=<%=oRS("id")%>'><%=oRS("name")%></a>
         <br>Seller: <a href='auction.asp?id=<%=oRS("id")%>'><%=oRS("username")%></a>
         <br>Opened for: <%=oRS("duration")%> days
@@ -97,8 +83,8 @@
     <%
     else
     %>
-    <div style = "float:left; width: 250; height: 300">
-        <img src='/productitems/<%=oRS("image")%>' width="150" height="150">
+    <div style = "float:left; width: 160; height: 230">
+        <img src='/productitems/<%=oRS("image")%>' width="100" height="100">
         <br><%=oRS("name")%>
         <br>Seller: <%=oRS("username")%>
         <br><span style="color:red">Auction closed</span>
@@ -108,13 +94,10 @@
 
     if count = d - 1 then
 %>
-      <div style = "float:left; width: 50px; height: 300px">
-      <a href='buyproducts.asp?c=<%=c+4%>&d=<%=d+4%>'>more...</a>
-      </div>
 <%
     end if
 
-    if count mod 3 = 2 then
+    if count mod 21 = 20 then
     %>
       </div><br>
     <%
@@ -127,13 +110,13 @@ wend
 
     if count = d - 1 then
 %>
-      <div style = "float:left; width: 50px; height: 300px">
-      <a href='buyproducts.asp?c=<%=c+4%>&d=<%=d+4%>'>more...</a>
-      </div>
 <%
     end if
-if count mod 3 <> 2 then
+if count mod 21 <> 20 then
     %>
+      <div style = "float:left; width: 50px; height: 300px">
+      <a href='buyproducts.asp?c=<%=c+4%>&d=<%=d+4%>'><img src="/graphics/images/more.png"></a>
+      </div>
       </div>
     <%
 end if
@@ -177,10 +160,11 @@ end if
     if not oRS.eof then
 
     %>
-<div style="float:left;position:relative;left:100px">
+<div style="width:100%;float:left;position:relative;left:100px;top:0px">
 
     <div class="shoptitle" style="float:left">
-      <span style="font-size:26">Your Won Auctions</span>
+      <span style="font-size:26">Auctions That You Won, <%=username%></span>
+      <hr>
     </div>
   <h1>&nbsp;</h1>
     <%
@@ -189,13 +173,13 @@ end if
 
     while not oRS.eof
 
-    if count mod 3 = 0 then
+    if count mod 4 = 0 then
     %>
       <div stylef = "width:100%;float:left">
 <%
       if count = 0 then
 %>
-      <div style = "float:left; width: 50px; height: 300px">
+      <div style = "float:left; width: 50px; height: 30px">
       <a href='buyproducts.asp?e=<%=e-4%>&f=<%=f-4%>'>less...</a>
       </div>
 <%
@@ -203,7 +187,7 @@ end if
     end if
     %>
     <div style = "float:left; width: 250; height: 300">
-        <a href='buysellproducts.asp?id=<%=oRS("id")%>'><img src='/productitems/<%=oRS("image")%>' width="150" height="150"></a>
+        <a href='buysellproducts.asp?id=<%=oRS("id")%>'><img src='/productitems/<%=oRS("image")%>' width="210" height="210"></a>
         <br><a href='buysellproducts.asp?id=<%=oRS("id")%>'><%=oRS("name")%></a>
         <br>Seller: <a href='auction.asp?id=<%=oRS("id")%>'><%=oRS("username")%></a>
         <br>You won this item!
@@ -211,13 +195,13 @@ end if
     <%
     if count = d - 1 then
 %>
-      <div style = "float:left; width: 50px; height: 300px">
-      <a href='buyproducts.asp?e=<%=e+4%>&f=<%=f+4%>'>more...</a>
+      <div style = "float:left; width: 50px; height: 30px">
+      <a href='buyproducts.asp?e=<%=e+4%>&f=<%=f+4%>'><img src="/graphics/images/more.png"></a>
       </div>
 <%
     end if
 
-    if count mod 3 = 2 then
+    if count mod 4 = 3 then
     %>
       </div><br>
 </div>
@@ -235,7 +219,18 @@ if count mod 3 <> 2 then
 </div>
     <%
 end if
+
+oConnection.close()
 %>
+<h1>&nbsp;</h1>
+<h1>&nbsp;</h1>
+<h1>&nbsp;</h1>
+<h1>&nbsp;</h1>
+<h1>&nbsp;</h1>
+<h1>&nbsp;</h1>
+<h1>&nbsp;</h1>
+
+<h1>&nbsp;</h1>
 <h1>&nbsp;</h1>
 <h1>&nbsp;</h1>
 <h1>&nbsp;</h1>

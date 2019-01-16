@@ -320,7 +320,50 @@ function myFunction() {
       &nbsp;
     </p>
     <div style="width:650px">
-      Your order was received.  Thank you for doing business with us.  A receipt email has been sent to you and your purchase will be processed shortly.  Within 1~2 business days your order will be processed, then shipped using UPS Ground shipping.
+      <%
+        dim price, itemid
+        
+        price = session("price")
+        
+        itemid = session("itemid")
+
+    dim oConnection
+
+    dim oRS
+
+    sConnection = "Dsn=odbc1;Integrated Security=True"
+
+    set oConnection = server.createobject("ADODB.Connection")
+
+    oConnection.Open "odbc1","sa","coppersink21"
+    
+    dim sqlstr
+
+    sqlstr = "INSERT INTO paypal_order (username, price) VALUES ('"&session("username")&"',"&price&")"
+
+    oConnection.Execute(sqlstr)
+
+    sqlstr = "SELECT * FROM paypal_order ORDER BY id DESC"
+
+    set rs = oConnection.Execute(sqlstr)
+
+    if not rs.eof then
+
+      dim oid
+
+      oid = rs("id")
+
+      sqlstr = "INSERT INTO paypal_orderitems (orderid, itemid) VALUES ('"&oid&"',"&itemid&")"
+
+      oConnection.Execute(sqlstr)
+
+      sqlstr = "DELETE FROM sellproducts WHERE id = " & itemid
+
+      oConnection.Execute(sqlstr)
+
+    end if
+      %>
+      Your order was received.  Amount: $<%=price%>.  Item ID: <%=itemid%>.  Thank you for doing business with us.  A receipt email has been sent to you and your purchase will be processed shortly.  Within 1~2 business days your order will be processed, then shipped using UPS Ground shipping.
     </div>
     <p>
       &nbsp;

@@ -19,8 +19,6 @@ up = request.form("up")
 
   if up = "yes" then
     
-    dim oConnection
-
     dim oRS
 
     name = request.form("name")
@@ -35,12 +33,6 @@ up = request.form("up")
 
     image = request.form("filename")
 
-    sConnection = "Dsn=odbc1;Integrated Security=True"
-
-    set oConnection = server.createobject("ADODB.Connection")
-
-    oConnection.Open "odbc1","sa","coppersink21"
-    
     dim sqlstr
 
     sqlstr = "INSERT INTO sellproducts (username, name, price, description, shippingpolicy, duration, image, inputdate) VALUES ('"&session("username")&"','"&name&"',"&price&",'"&description&"','"&shippingpolicy&"',"&duration&", '"&image&"', getDate())"
@@ -100,5 +92,9 @@ up = request.form("up")
   }
   </script>
     </form>
+
+<%
+oConnection.close()
+%>
 
     <!-- #include file="inc/footer.inc" -->

@@ -1,19 +1,10 @@
   <!-- #include file="inc/header.inc" -->
-  <%
-  dim category
-
-  category = request.querystring("category")
-
-  if category = "" then
-    category = "all"
-  end if
-  %>
   <div class="shop">
   
     <div style="width:100%; float:left">
 
     <div style="width:500px; float:left">
-      <a href="shop.asp"><img src="/graphics/images/shopformoreitems.png"></a>
+      <a href="shopcategories.asp"><img src="/graphics/images/shopformoreitems.png"></a>
     </div>
 
     <div style="width:500px; float:left">
@@ -25,22 +16,10 @@
     <h1>&nbsp;</h1>
 
     <div class="shoptitle">
-  	  <span style="font-size:26">Your Cart</span>
+  	  <span style="font-size:26">View Cart</span>
     </div>
 
-    <h1>&nbsp;</h1>
-
     <%
-    dim oConnection
-
-    dim oRS
-
-    sConnection = "Dsn=odbc1;Integrated Security=True"
-
-    set oConnection = server.createobject("ADODB.Connection")
-
-    oConnection.Open "odbc1","sa","coppersink21"
-
     dim itemid
 
     itemid = request.form("itemid")
@@ -109,14 +88,15 @@
     <div>
     <div style = "width:100%;float:left">
 
-    <div style="float:left;width:180px">item id</div>
-    <div style="float:left;width:180px">image</div>
-    <div style="float:left;width:180px">price</div>
+    <div style="float:left;width:280px">item id</div>
+    <div style="float:left;width:280px">category</div>
+    <div style="float:left;width:280px">image</div>
+    <div style="float:left;width:280px">price</div>
 
     </div>
 
     <div style = "width:100%;float:left">
-      <hr style="color:#f0f0f0;width:400px;position:relative;left:-420px">
+      <hr style="color:#f0f0f0;width:1440px;position:relative;left:0px">
     </div>
     <%
 
@@ -132,9 +112,10 @@
         %>
       <div style = "width:100%;float:left">
 
-      <div style="float:left;width:180px">> <a href='item.asp?itemid=<%=iid%>'><%=r_s("name")%></a></div>
-      <div style="float:left;width:180px"><img height=50 src=/productitems/<%=r_s("image")%>></div>
-      <div style="float:left;width:120px">$<%=(100-cdbl(r_s("discount")))*cdbl(r_s("price"))/100%></div>
+      <div style="float:left;width:280px"><a href='item.asp?itemid=<%=iid%>'><%=r_s("name")%></a></div>
+      <div style="float:left;width:280px"><%=r_s("category")%></div>
+      <div style="float:left;width:280px"><img height=50 src=/productitems/<%=r_s("image")%>></div>
+      <div style="float:left;width:280px">$<%response.write formatnumber((100-cdbl(r_s("discount")))*cdbl(r_s("price"))/100,2)%></div>
 
       </div><br>
         <%
@@ -147,7 +128,7 @@
  
   %>
     <div style = "width:100%;float:left">
-      <hr style="color:#f0f0f0;width:400px;position:relative;left:-420px">
+      <hr style="color:#f0f0f0;width:1440px;position:relative;left:0px">
     </div>
 
   </div>
@@ -156,28 +137,19 @@
 
   if total > 0 then
   %>
-<h4>Subtotal: $<%=total%></h4>
-<h4>UPS Ground Shipping Cost: $20.00&nbsp;<a onclick="upd()"><span style="color:blue">What shipping?</span></a><div id="mid" style="display:none;"></div></h4>
-<h4>Total: $<%=total+20%></h4>
+<h4>Subtotal: $<%=formatnumber(total,2)%></h4>
+<h4>UPS Ground Shipping Cost: $20.00&nbsp;<div id="mid" style="display:none;"></div></h4>
+<h4>Total: $<%=formatnumber(total+20,2)%></h4>
 <a href="cart.asp?do=clear" style="color:#ff0000"><button>Clear cart</button></a>
 <br><br>
 <script>
-  function upd() {
-    var x = document.getElementById("mid");
-    if(x.style.display == 'none') {
-      x.innerHTML = '<img src="/graphics/images/shipping.png">$20 flat fee fore shipping using UPS Ground Shipping method.  Shipping takes usually 1 ~ 6 business days.';
-      x.style.display = "block";
-    } else if (x.style.display == 'block') {
-      x.innerHTML = '';
-      x.style.display = "none";
-    }
-  }
+  var x = document.getElementById("mid");
+  x.innerHTML = '<img src="/graphics/images/shipping.png"><font size=-2>$20 flat fee fore shipping using UPS Ground Shipping method.  Shipping takes usually 1 ~ 6 business days.</font>';
+  x.style.display = "block";
 </script>
 <%
 end if
 %>
-<a href="/shop.asp">> Keep Shopping</a>
-<br>
 <p>&nbsp;</p>
 
   <form method="post" action="buy.asp">
@@ -196,5 +168,7 @@ end if
   </form>
 
 </div>
-
+<%
+oConnection.close()
+%>
   <!-- #include file="inc/footer.inc" -->

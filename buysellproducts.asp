@@ -1,15 +1,6 @@
   <!-- #include file="inc/header.inc" -->
-  <%
-  dim category
-
-  category = request.querystring("category")
-
-  if category = "" then
-    category = "all"
-  end if
-  %>
   <h1>&nbsp;</h1>
-  <h1 style="position:relative;left:100px">Pay for Auction Won item</h1>
+  <h1 style="position:relative;left:100px">Make Payment For Auction Won item</h1>
   <div class="shop" style="height:500px;position:relative;left:100px">
   
     <%
@@ -29,15 +20,7 @@
       response.redirect "/login.asp"
     end if
 
-    dim oConnection
-
     dim oRS
-
-    sConnection = "Dsn=odbc1;Integrated Security=True"
-
-    set oConnection = server.createobject("ADODB.Connection")
-
-    oConnection.Open "odbc1","sa","coppersink21"
 
     dim id
 
@@ -45,7 +28,7 @@
     
     dim sqlstr
 
-    sqlstr = "select * from sellproducts where id = " & id
+    sqlstr = "select username, name, description, image, price, shippingpolicy from sellproducts where id = " & id
 
     set rs = oConnection.Execute(sqlstr)
 
@@ -59,6 +42,8 @@
 
     dim description
 
+    dim sp
+
     if not rs.eof then
 
       username = rs("username")
@@ -70,6 +55,8 @@
       image = rs("image")
 
       price = rs("price")
+
+      sp = rs("shippingpolicy")
 
       sqlstr = "select * from shoppers where username = '"&username&"'"
 
@@ -87,17 +74,24 @@
 
       if not rr.eof then
         em = rr("email")
+        session("price") = price
+        session("itemid") = id
     %>
-  <div id = "container" style = "width:100%; position:relative;top:-20px">
+        <div style="float:left ; width:500px; float:left">
+      <a href="buyproducts.asp"><img src="/graphics/images/shopformoreitems.png"></a>
+    </div>
+
+  <div id = "container" style = "width:100%; position:relative;top:-200px">
       <div id = "middle" style = "float:left; width: 200;">
-        Payment Cost: $<%=price%><br>
+        Seller: <%=username%><br>
+        Your Bid: $<%=price%><br>
         <hr>
-        <b>Total: $<%=price%></b><br><br><br><br><br><br><br><br><br>
-        titl: <%=rs("name")%><br>
+        <h3><b>Total: $<%=price%></b></h3><br><br><br><br><br><br><br><br><br>
+        Title: <%=rs("name")%><br>
         <img src='/productitems/<%=rs("image")%>' width="200" height="200"><br>
-        descript: <%=description%><br><br>
-        <img src="/graphics/images/shipping.png"><br>
-        UPS Ground (fast delivery)
+        Description: <%=description%><br><br>
+        Shipping Policy: <%=sp%><br><br>
+        
       </div>
   </div>
   <%  end if
@@ -107,11 +101,28 @@
 
   </div>
 
-      <div id = "right" style = "float:left; width: 200; position:relative; left:-100px; top:-370px">
-        <a href='https://www.paypal.com/cgi-bin/webscr?email=<%=em%>&business=<%=email%>&cmd=_xclick&currency_code=USD&amount=<%=price%>&item_name=priceBay_auction_<%=name%>'>
-          <img src="/graphics/images/ppbtn.png" width="200">
-        </a>
-    </div>
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post" style="float:left ; position:relative; left:-110px; top:-500px">
+<input type="hidden" name="cmd" value="_xclick">
+<input type="hidden" name="business" value='<%=email%>'>
+<input type="hidden" name="email" value='<%=em%>'>
+<input type="hidden" name="lc" value="US">
+<input type="hidden" name="item_name" value='priceBay_auction_<%=name%>'>
+<input type="hidden" name="item_number" value='priceBay_auction_<%=id%>'>
+<input type="hidden" name="amount" value='<%=price%>'>
+<input type="hidden" name="currency_code" value="USD">
+<input type="hidden" name="button_subtype" value="services">
+<input type="hidden" name="no_note" value="0">
+<input type="hidden" name="cn" value="Add special instructions to the seller:">
+<input type="hidden" name="no_shipping" value="2">
+<input type="hidden" name="rm" value="1">
+<input type="hidden" name="return" value="http://172.3.226.131/paypal.asp">
+<input type="hidden" name="bn" value="PP-BuyNowBF:btn_buynowCC_LG.gif:NonHosted">
+<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form>
 
-  
+<%
+oConnection.close()
+%>
+
     <!-- #include file="inc/footer.inc" -->
