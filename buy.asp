@@ -1,15 +1,8 @@
   <!-- #include file="inc/header.inc" -->
   <%
-  dim category
-
-  category = request.querystring("category")
-
-  if category = "" then
-    category = "all"
-  end if
   %>
   <h1>&nbsp;</h1>
-  <h1 style="position:relative;left:100px">Pay for priceBay items</h1>
+  <h1 style="position:relative;left:100px">Make Payment For priceBay Items</h1>
   <div class="shop">
   
     <div class="shoptitle">
@@ -32,15 +25,7 @@
       response.redirect "/login.asp"
     end if
 
-    dim oConnection
-
     dim oRS
-
-    sConnection = "Dsn=odbc1;Integrated Security=True"
-
-    set oConnection = server.createobject("ADODB.Connection")
-
-    oConnection.Open "odbc1","sa","coppersink21"
 
     dim t
 
@@ -60,6 +45,12 @@
       <div id = "right" style = "float:left; width: 400;">
         <img src="/graphics/images/cards.png" width="100"><br><br>
         <form method="POST" action="https://test.authorize.net/gateway/transact.dll"> 
+          <h3>Billing</h3>
+          Your Address: <input type=text id="address" name="address"/><br><br>
+          Your City: <input type=text id="city" name="city"/><br><br>
+          Your State: <input type=text id="state" name="state"/><br><br>
+          Your Zip Code: <input type=text id="zipcode" name="zipcode"/><br><br>
+          Your Country: <input type=text id="country" name="country"/><br><br><br>
           <input type=hidden id="x_login" name="x_login" value='6r46jMVd4X'/>
           <input type=hidden id="x_tran_key" name="x_tran_key" value='5fRKD8z8454KygQK'/>
           Your Card Type: 
@@ -73,11 +64,45 @@
           Your Exp Date: <input type=text id="x_exp_date" name="x_exp_date"/><br><br>
           Your Security Code: <input type=text id="x_card_code" name="x_card_code"/><br><br>
           <h3>Shipping</h3>
-          Your Address: <input type=text name="x_custom_3"/><br><br>
-          Your City: <input type=text name="x_custom_4"/><br><br>
-          Your State: <input type=text name="x_custom_5"/><br><br>
-          Your Zip Code: <input type=text name="x_custom_6"/><br><br>
-          Your Country: <input type=text name="x_custom_7"/><br><br><br>
+          Same as Billing <input type="checkbox" id="same" onclick="sameAsBilling()"><br><br>
+          <script>
+            function sameAsBilling() {
+              var x = document.getElementById("same");
+              if(x.checked) {
+                var y = document.getElementById("x_custom_3");
+                x = document.getElementById("address");
+                y.value = x.value;
+                y = document.getElementById("x_custom_4");
+                x = document.getElementById("city");
+                y.value = x.value;
+                y = document.getElementById("x_custom_5");
+                x = document.getElementById("state");
+                y.value = x.value;
+                y = document.getElementById("x_custom_6");
+                x = document.getElementById("zipcode");
+                y.value = x.value;
+                y = document.getElementById("x_custom_7");
+                x = document.getElementById("country");
+                y.value = x.value;
+              } else {
+                var y = document.getElementById("x_custom_3");
+                y.value = "";
+                y = document.getElementById("x_custom_4");
+                y.value = "";
+                y = document.getElementById("x_custom_5");
+                y.value = "";
+                y = document.getElementById("x_custom_6");
+                y.value = "";
+                y = document.getElementById("x_custom_7");
+                y.value = "";
+              }
+            }
+          </script>
+          Your Address: <input type=text id="x_custom_3" name="x_custom_3"/><br><br>
+          Your City: <input type=text id="x_custom_4" name="x_custom_4"/><br><br>
+          Your State: <input type=text id="x_custom_5" name="x_custom_5"/><br><br>
+          Your Zip Code: <input type=text id="x_custom_6" name="x_custom_6"/><br><br>
+          Your Country: <input type=text id="x_custom_7" name="x_custom_7"/><br><br><br>
           <input type="submit" value="Proceed to Pay" style="width: 150px; height:50px" />
           <input type=hidden id="x_amount" name="x_amount" value=<%=t+20%>/>
           <input type=hidden id="x_relay_url" name="x_relay_url" value='http://172.3.226.131/relayresponse.asp'/>
@@ -99,4 +124,24 @@
   <h1>&nbsp;</h1>
   <h1>&nbsp;</h1>
   <h1>&nbsp;</h1>
+
+  <h1>&nbsp;</h1>
+  <h1>&nbsp;</h1>
+  <h1>&nbsp;</h1>
+  <h1>&nbsp;</h1>
+  <h1>&nbsp;</h1>
+  <h1>&nbsp;</h1>
+  <h1>&nbsp;</h1>
+
+  <h1>&nbsp;</h1>
+  <h1>&nbsp;</h1>
+  <h1>&nbsp;</h1>
+  <h1>&nbsp;</h1>
+  <h1>&nbsp;</h1>
+  <h1>&nbsp;</h1>
+  <h1>&nbsp;</h1>
+
+  <%
+oConnection.close()
+  %>
     <!-- #include file="inc/footer.inc" -->

@@ -1,38 +1,11 @@
   <!-- #include file="inc/header.inc" -->
-  <%
-  dim category
-
-  category = request.querystring("category")
-
-  if category = "" then
-    category = "all"
-  end if
-  %>
   <h1>&nbsp;</h1>
-  <div class="auction">
+  <div class="auction" style="position:relative;top:-100px;width:100%">
   
-    <div class="shoptitle" style="height:60px">
-  	  <span style="font-size:26">Item Auction</span>
-    </div>
-
-    <div class="shoptitle" style="height:60px">
-      ><a href="auction.asp"><span style="font-size:16">Your Other Auctions</span></a>
-    </div>
-
     <%
     dim cartid
 
     cartid = session("cartid")
-
-    dim oConnection
-
-    dim oRS
-
-    sConnection = "Dsn=odbc1;Integrated Security=True"
-
-    set oConnection = server.createobject("ADODB.Connection")
-
-    oConnection.Open "odbc1","sa","coppersink21"
 
     dim username
 
@@ -50,9 +23,21 @@
 
     if bidamount <> "" then
 
-      sqlstr = "INSERT INTO Bids (username, bidamount, itemid, inputdate) VALUES ('"&username&"',"&bidamount&","&itemid&",getDate())"
+      sqlstr = "SELECT price, image, description, name, id, duration, DATEADD(day, duration, inputdate) deadline FROM sellproducts WHERE id='" & itemid & "' AND getDate() < DATEADD(day, duration, inputdate)"
 
-      oConnection.Execute(sqlstr)
+      set s = oConnection.Execute(sqlstr)
+
+      if not s.eof then
+
+        sqlstr = "INSERT INTO Bids (username, bidamount, itemid, inputdate) VALUES ('"&username&"',"&bidamount&","&itemid&",getDate())"
+
+        oConnection.Execute(sqlstr)
+
+      else
+
+        bidamount = ""
+
+      end if
 
     end if
     
@@ -76,15 +61,19 @@
 
         uname = uRS("username")
 
-        sqlstr = "SELECT * FROM mustpay WHERE itemid = " & idd & " and username = '"&uname&"'"
+        if username = uname then
 
-        set oo = oConnection.execute(sqlstr)
+          sqlstr = "SELECT * FROM mustpay WHERE itemid = " & idd & " and username = '"&uname&"'"
 
-        if oo.eof then
+          set oo = oConnection.execute(sqlstr)
 
-          sqlstr = "INSERT INTO mustpay (username, itemid) VALUES ('"&uname&"',"&idd&")"
+          if oo.eof then
 
-          oConnection.Execute(sqlstr)
+            sqlstr = "INSERT INTO mustpay (username, itemid) VALUES ('"&uname&"',"&idd&")"
+
+            oConnection.Execute(sqlstr)
+
+          end if
 
         end if
 
@@ -102,7 +91,8 @@
       closed = true
     %>
     <div style="height:60px">
-      <%=oRS("username")%> won this item.  <font color="red">Auction closed!</font>
+      <%=oRS("username")%> won this item.  <font color="red">Auction closed!</font><br>
+      <a href='buysellproducts.asp?id=<%=itemid%>'>Buy product now</a>
     </div>
     <%
     end if
@@ -116,9 +106,12 @@
       dsc = oRS("description")
     %>
   <div id = "container" style = "width:100%">
-      <div id = "middle" style = "float:left; width: 250;">
+    <div class="shoptitle" style="height:60px;font-size:32px">
+          Auction For: <%=oRS("name")%>
+    </div>
+    <div id = "middle" style = "float:left; width: 250;">
           <a href=item.asp?itemid=<%=oRS("id")%>><img width="220" height="150" src=/productitems/<%=oRS("image")%>></a>
-          <br>Title: <%=oRS("name")%>
+          <br>Name: <%=oRS("name")%>
       </div>
       <div id = "right" style = "float:left; width: 200px;">
         <span style="color:#000">Description:</span>
@@ -126,7 +119,7 @@
         <span style="color:#000">Shipping Policy:</span>
         <%=oRS("shippingpolicy")%><br><br>
         <span style="color:#000">Minimum Price:</span>
-        $<%=oRS("price")%><br><br>
+        <b>$<%=oRS("price")%></b><br><br>
         <%
         sqlstr = "SELECT username, bidamount FROM Bids WHERE itemid='" & itemid & "' ORDER BY id DESC"
 
@@ -197,5 +190,9 @@ var x = setInterval(function() {
   %>
 
   </div>
+
+<%
+oConnection.close()
+%>
   
     <!-- #include file="inc/footer.inc" -->
