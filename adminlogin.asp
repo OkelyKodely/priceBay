@@ -1,27 +1,31 @@
-  <!-- #include file="inc/header.inc" -->
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
   <%
   dim username
   dim password
 
-  if session("username") = "" then
+  if session("ausername") = "" then
 
     username = request.form("username")
     password = request.form("password")
 
   else
 
-    username = session("username")
-    password = session("password")
+    username = session("ausername")
+    password = session("apassword")
 
   end if
 
   %>
   <div class="login" style="float:left; width:100%">
-  <h1 style="position:relative;left:100px;top:-50px">Sign In</h1>
+  <h1 style="position:relative;left:350px;top:-50px">Admin Login</h1>
   <%
   if username = "" then
   %>
-      <div style="width:600px;height:600px;background-image:url('/graphics/images/loginbg.png');background-repeat:no-repeat;background-attached:fixed;background-position:center;position:relative;left:-150px;top:-200px">
+      <div style="width:600px;height:600px;position:relative;left:150px;top:-200px">
         <div>
 
     <div style="position:relative;left:200px;top:150px;z-index:2">
@@ -41,19 +45,19 @@
 <%
 else
 
-    dim sqlstr
+  dim sqlstr
 
-    sqlstr = "SELECT * FROM shoppers WHERE username='"&username&"' AND password='"&password&"'"
+  if username = "admin_cho4321" and password = "admin231!#" then
+    session("ausername") = username
+    session("apassword") = password
+  %><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%=username%> logged in.  Thanks.
 
-    set oRS = oConnection.Execute(sqlstr)
+  <a href="adminitems.asp">Admin Items</a>  <a href="adminlogout.asp">Admin Logout</a>
 
-if not oRS.eof then
-  session("username") = oRS("username")
-%><br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%=oRS("username")%> logged in.  Thanks.
-<%
+  <%
   else
-    if session("username") = "" then
+    if session("ausername") = "" then
       response.write "not signed in"
     end if
   end if
@@ -62,4 +66,3 @@ end if
   </div>
 
 <h1>&nbsp;</h1>
-  <!-- #include file="inc/footer.inc" -->

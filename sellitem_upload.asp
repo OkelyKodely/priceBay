@@ -8,10 +8,6 @@
       <span style="font-size:26">Sell</span>
     </div>
 
-  <p>
-    <img src="/graphics/images/sellonebay.png">
-  </p>
-
 <%
 dim up, name, price, description, shippingpolicy, duration, image
 

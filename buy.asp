@@ -52,7 +52,7 @@
           Your Zip Code: <input type=text id="zipcode" name="zipcode"/><br><br>
           Your Country: <input type=text id="country" name="country"/><br><br><br>
           <input type=hidden id="x_login" name="x_login" value='6r46jMVd4X'/>
-          <input type=hidden id="x_tran_key" name="x_tran_key" value='5fRKD8z8454KygQK'/>
+          <input type=hidden id="x_tran_key" name="x_tran_key" value='84XDv9Xq2E7ay6s7'/>
           Your Card Type: 
           <select name="cc">
             <option value="visa">VISA</option>
@@ -104,13 +104,13 @@
           Your Zip Code: <input type=text id="x_custom_6" name="x_custom_6"/><br><br>
           Your Country: <input type=text id="x_custom_7" name="x_custom_7"/><br><br><br>
           <input type="submit" value="Proceed to Pay" style="width: 150px; height:50px" />
-          <input type=hidden id="x_amount" name="x_amount" value=<%=t+20%>/>
-          <input type=hidden id="x_relay_url" name="x_relay_url" value='http://172.3.226.131/relayresponse.asp'/>
+          <input type=hidden id="x_amount" name="x_amount" value='<%=t+20%>' />
+          <input type=hidden id="x_relay_url" name="x_relay_url" value='http://pricebay.gq/relayresponse.asp'/>
           <input type=hidden id="x_relay_response" name="x_relay_response" value='Y'/>
           <input type=hidden id="x_type" name="x_type" value='AUTH_CAPTURE'/>
           <input type=hidden id="x_currency_code" name="x_currency_code" value='USD'/>
-          <input type=hidden name="x_custom_1" value=<%=session("username")%> />
-          <input type=hidden name="x_custom_2" value=<%=cartid%> />
+          <input type=hidden name="x_custom_1" value='<%=session("username")%>' />
+          <input type=hidden name="x_custom_2" value='<%=cartid%>' />
         </form>
       </div>
   </div>

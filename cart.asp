@@ -15,7 +15,7 @@
 
     <h1>&nbsp;</h1>
 
-    <div class="shoptitle">
+    <div class="shoptitle" style="position:relative;top:-5px">
   	  <span style="font-size:26">View Cart</span>
     </div>
 

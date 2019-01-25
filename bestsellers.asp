@@ -2,15 +2,13 @@
   <div class="shop" style="float:left">
   
     <div class="shoptitle" style="position:relative;top:-100px">
-      <span style="font-size:36">New Arrival items</span>
+      <span style="font-size:36">Best Seller items</span>
     </div><br>
 <div style="position:relative;top:-100px">
   <a href="shopcategories.asp"><img src="/graphics/images/shopformoreitems.png"></a>
   </div>
 
-
-      <img src="/graphics/images/new-arrivals-banner.png">
-
+      <img src="/graphics/images/best-sellers-banner.png">
 
     <%
     dim a, b
@@ -34,7 +32,7 @@
     ssql = ssql & "("
     ssql = ssql & "    SELECT itemid, image, name, price, "
     ssql = ssql & "    ROW_NUMBER() OVER (ORDER BY itemid DESC) AS 'RowNumber'"
-    ssql = ssql & "    FROM products WHERE newarrivals = 1"
+    ssql = ssql & "    FROM products WHERE bestseller = 1"
     ssql = ssql & ") "
     ssql = ssql & "SELECT * "
     ssql = ssql & "FROM sellProds "
@@ -51,7 +49,7 @@
         if a <> 1 then
         %>
       <div style = "float:left; width: 50px; height: 30px">
-      <a href='newarrivals.asp?a=<%=a-4%>&b=<%=b-4%>'>less...</a>
+      <a href='bestsellers.asp?a=<%=a-4%>&b=<%=b-4%>'>less...</a>
     </div>
     <%
     end if
@@ -91,7 +89,7 @@ if count mod 4 <> 3 then
       </div>
 
       <div style = "float:left; width: 250px; height: 300px">
-      <a href='newarrivals.asp?a=<%=a+4%>&b=<%=b+4%>'><img src="/graphics/images/more.png"></a>
+      <a href='bestsellers.asp?a=<%=a+4%>&b=<%=b+4%>'><img src="/graphics/images/more.png"></a>
       </div>
     <%
 end if

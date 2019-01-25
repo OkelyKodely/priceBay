@@ -185,10 +185,10 @@ function topFunction() {
     <%else%>
     <div style="float:left; width: 800px; position:relative; left:0px">
     <%end if%>
-      <a href="http://172.3.226.131/index.asp"><img src="http://172.3.226.131/graphics/images/logo.bmp"></a>
+      <a href="http://pricebay.gq/index.asp"><img src="http://pricebay.gq/graphics/images/logo.bmp"></a>
     </div>
     <div>
-      <a onclick="window.location.href='http://172.3.226.131/cart.asp'">Your Cart |<span id="maxSb">+</span>|</a>
+      <a onclick="window.location.href='http://pricebay.gq/cart.asp'">Your Cart |<span id="maxSb">+</span>|</a>
       <div id="myDIV" style="text-align:center;border:1px solid #a0a0a0;display:none;z-index:2;position:absolute;top:20px;left:640px;background-color:white;color:black;width:260px;height:540px">
 <%
     dim oConnectio
@@ -199,7 +199,7 @@ function topFunction() {
 
     set oConnectio = server.createobject("ADODB.Connection")
 
-    oConnectio.Open "odbc1","sa","coppersink21"
+    oConnectio.Open "odbc2","sa","coppersink21"
 
     dim carid
 
@@ -245,10 +245,10 @@ function topFunction() {
         <br><br>SubTotal: $<%=tt%><br><br><br>
         UPS Ground: $20<br><br><br>
         Total: $<%=tt+20%><br><br><br>
-        <a href='http://172.3.226.131/buy.asp?t=<%=tt%>'><button style="width:150px; height:40px;">Checkout</button></a><br><br><br>
-        <a href='http://172.3.226.131/cart.asp'><button style="width:150px; height:40px;">See in Details</button></a><br><br>
-        <img src="http://172.3.226.131/graphics/images/cards.png" width="100"><br><br>
-        <img src="http://172.3.226.131/graphics/images/shipping.png">
+        <a href='http://pricebay.gq/buy.asp?t=<%=tt%>'><button style="width:150px; height:40px;">Checkout</button></a><br><br><br>
+        <a href='http://pricebay.gq/cart.asp'><button style="width:150px; height:40px;">See in Details</button></a><br><br>
+        <img src="http://pricebay.gq/graphics/images/cards.png" width="100"><br><br>
+        <img src="http://pricebay.gq/graphics/images/shipping.png">
         <%
 
 
@@ -260,7 +260,7 @@ function topFunction() {
   </div>
   <div style="float:left; width:100%;position:relative;left:100px;top:20px">
     <form method="get" action="shopresults.asp">
-      <span style="font-size:20px"><img src="http://172.3.226.131/graphics/images/searchglass.png" width="50" height="40">Search: </span> <input type="text" name="query" id="searchbar" style="background-color:white;color:#22b14c;font-family:arial;font-size:18px;" value="[Type a keyword...]" onclick="this.value=''"> <input type="submit" value="Search Items">
+      <span style="font-size:20px"><img src="http://pricebay.gq/graphics/images/searchglass.png" width="50" height="40">Search: </span> <input type="text" name="query" id="searchbar" style="background-color:white;color:#22b14c;font-family:arial;font-size:18px;" value="[Type a keyword...]" onclick="this.value=''"> <input type="submit" value="Search Items">
     </form>
   </div>
   <script>
@@ -280,17 +280,17 @@ function myFunction() {
   </script>
   <div class="menu" style="float:left">
     <!--<div class="menuitem"><a href="/shop.asp">Home</a></div>-->
-    <div class="menuitem"><a href="http://172.3.226.131/categories.asp">Shop</a></div>
-    <div class="menuitem"><a href="http://172.3.226.131/about.asp">About priceBay</a></div>
-    <div class="menuitem"><a href="http://172.3.226.131/buyproducts.asp">Buy</a></div>
-    <div class="menuitem"><a href="http://172.3.226.131/sell.asp">Sell</a></div>
+    <div class="menuitem"><a href="http://pricebay.gq/categories.asp">Shop</a></div>
+    <div class="menuitem"><a href="http://pricebay.gq/about.asp">About priceBay</a></div>
+    <div class="menuitem"><a href="http://pricebay.gq/buyproducts.asp">Buy</a></div>
+    <div class="menuitem"><a href="http://pricebay.gq/sell.asp">Sell</a></div>
     <%if session("username") <> "" then%>
     <%else%>
-    <div class="menuitem"><a href="http://172.3.226.131/signup.asp"><nobr>Sign Up</nobr></a></div>
-    <div class="menuitem"><a href="http://172.3.226.131/login.asp">Sign In</a></div>
+    <div class="menuitem"><a href="http://pricebay.gq/signup.asp"><nobr>Sign Up</nobr></a></div>
+    <div class="menuitem"><a href="http://pricebay.gq/login.asp">Sign In</a></div>
     <%end if%>
-    <div class="menuitem"><a href="http://172.3.226.131/faq.asp">FAQ</a></div>
-    <div class="menuitem"><a href="http://172.3.226.131/contact.asp">Contact & Map</a></div>
+    <div class="menuitem"><a href="http://pricebay.gq/faq.asp">FAQ</a></div>
+    <div class="menuitem"><a href="http://pricebay.gq/contact.asp">Contact & Map</a></div>
     <p>
         <br>
     </p>
@@ -300,15 +300,6 @@ function myFunction() {
   </div>
   <h1>&nbsp;</h1>
   <h1>&nbsp;</h1>
-  <div style="position:relative;left:100px">
-<%
-  if session("username") <> "" then
-    Response.Write "Hi <a href=""/orders.asp""><u>" & session("username") & "</u></a>, welcome! <a href='http://172.3.226.131/logout.asp'><span style='color:green'>Logout</span></a>"
-  else
-    Response.Write "Hi stranger, <a href=""http://172.3.226.131/login.asp""><u>Sign in</u></a>"
-  end if
-%>
-  </div>
 
    <button onclick="topFunction()" id="myBtn" title="Go to top">Top</button> 
 
@@ -326,7 +317,7 @@ function myFunction() {
       &nbsp;
     </p>
     <div style="width:650px">
-      <a href="http://172.3.226.131/index.asp">Continue shopping with us.</a>
+      <a href="http://pricebay.gq/index.asp">Continue shopping with us.</a>
     </div>
 </div>
   <h1>&nbsp;</h1>
@@ -336,21 +327,21 @@ function myFunction() {
   <div class="footer" style="border:1px solid gray;position:relative;top:150px;left:-200px;width:1650px;height:240px;">
   <div style="position:absolute;left:300px;">
     <br><br><br>
-    <a href="http://172.3.226.131/termsOfService.asp">Terms Of Service</a> | 
-    <a href="http://172.3.226.131/shop.asp">Shop With Us</a> | 
-    <a href="http://172.3.226.131/categories.asp">See Categories</a> |
-    <a href="http://172.3.226.131/about.asp">About priceBay</a> |
-    <a href="http://172.3.226.131/buyProducts.asp">Buy</a> |
-    <a href="http://172.3.226.131/sell.asp">Sell</a>
+    <a href="http://pricebay.gq/termsOfService.asp">Terms Of Service</a> | 
+    <a href="http://pricebay.gq/shop.asp">Shop With Us</a> | 
+    <a href="http://pricebay.gq/categories.asp">See Categories</a> |
+    <a href="http://pricebay.gq/about.asp">About priceBay</a> |
+    <a href="http://pricebay.gq/buyProducts.asp">Buy</a> |
+    <a href="http://pricebay.gq/sell.asp">Sell</a>
     <%if session("username") <> "" then%>
-    | <a href="http://172.3.226.131/orders.asp">Your Orders</a>
+    | <a href="http://pricebay.gq/orders.asp">Your Orders</a>
     <%else%>
-    | <a href="http://172.3.226.131/signUp.asp">Sign Up</a>
-    | <a href="http://172.3.226.131/logIn.asp">Sign In</a>
+    | <a href="http://pricebay.gq/signUp.asp">Sign Up</a>
+    | <a href="http://pricebay.gq/logIn.asp">Sign In</a>
     <%end if%>
-    | <a href="http://172.3.226.131/contact.asp">Contact</a>
+    | <a href="http://pricebay.gq/contact.asp">Contact</a>
     <br><br>
-    Copyright &copy; 2019 <a href="http://172.3.226.131/shop.asp">priceBay Inc.</a> All Rights Reserved
+    Copyright &copy; 2019 <a href="http://pricebay.gq/shop.asp">priceBay Inc.</a> All Rights Reserved
     <br><br>
     <a href="https://www.freewebsubmission.com"><b>FreeWebSubmission.com</b></a> 
   </div>

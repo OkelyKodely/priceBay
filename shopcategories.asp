@@ -2,78 +2,253 @@
   <div class="shop" style="float:left;position:relative;top:-70px">
   
     <div class="shoptitle">
-      <span style="font-size:36">Shop</span>
+      <span style="font-size:36">Shop by categories</span>
     </div><br>
-
-    <a href="shopcategories.asp?category=all">Shop All Categories</a>
-    <br>
-
+<script>
+$(function () {
+    $('.item img').each(function () {
+        $(this).data('original', this.src);
+    }).mouseenter(function () {
+        $(this).fadeOut(500, function(){
+          $(this).attr('src', $(this).data('hover'));
+          $(this).fadeIn(500);
+        });
+    }).mouseleave(function () {
+        $(this).fadeOut(500, function(){
+          $(this).attr('src', $(this).data('original'));
+          $(this).fadeIn(500);
+        });
+    });
+});
+</script>
+<%
+if category = "all" then
+%>
     <div style="width:1000px">
-    <div style="width: 100%;height:270px;float:left">
-      <div style="float: left;width:280px;height:220px">
-        <a href="shopcategories.asp?category=fashion#shophere"><img src="/graphics/images/fashion-20-off.png" width="250" height="200"></a>
+    <div style="width: 100%;height:240px;float:left">
+      <div class="item" style="float: left;font-weight:bold">
+        <a href="shopcategories.asp?category=fashion"><img src="/graphics/images/fashion-20-off.png" width="240" height="240"></a>
       </div>
-      <div style="float: left;width:280px">
-        <a href="shopcategories.asp?category=kitchen#shophere"><img src="/graphics/images/kitchen-upto-50-off.png" width="250" height="200"></a>
+      <div class="item" style="float: left;font-weight:bold">
+        <a href="shopcategories.asp?category=kitchen"><img src="/graphics/images/kitchen-upto-50-off.png" width="240" height="240"></a>
       </div>
-      <div style="float: left;width:280px">
-        <a href="shopcategories.asp?category=misc#shophere"><img src="/graphics/images/otheritems.png" width="250" height="200"></a>
-      </div>
-    </div>
-
-    <div style="width: 100%;height:270px;float:left">
-      <div style="float:left;width:280px;height:220px">
-        <a href="shopcategories.asp?category=software#shophere"><img src="/graphics/images/software.png" width="250" height="200"></a>
-      </div>
-      <div style="float:left;width:280px;height:220px">
-        <a href="shopcategories.asp?category=computer#shophere"><img src="/graphics/images/computers.png" width="250" height="200"></a>
-      </div>
-      <div style="float:left;width:280px;height:220px">
-        <a href="shopcategories.asp?category=motors#shophere"><img src="/graphics/images/motors.png" width="250" height="200"></a>
+      <div class="item" style="float: left;font-weight:bold">
+        <a href="shopcategories.asp?category=misc"><img src="/graphics/images/otheritems.png" width="240" height="240"></a>
       </div>
     </div>
 
-    <div style="width: 100%;height:270px;float:left">
-      <div style="float:left;width:280px;height:220px">
-        <a href="shopcategories.asp?category=electronics#shophere"><img src="/graphics/images/electronics.png" width="250" height="200"></a>
+    <div style="width: 100%;height:240px;float:left">
+      <div class="item" style="float:left;font-weight:bold">
+        <a href="shopcategories.asp?category=software"><img src="/graphics/images/software.png"></a>
       </div>
-      <div style="float:left;width:280px;height:220px">
-        <a href="shopcategories.asp?category=collectibles#shophere"><img src="/graphics/images/collectibles.png" width="250" height="200"></a>
+      <div class="item" style="float:left;font-weight:bold">
+        <a href="shopcategories.asp?category=computer"><img src="/graphics/images/computers.png"></a>
       </div>
-      <div style="float:left;width:280px;height:220px">
-        <a href="shopcategories.asp?category=homeandgarden#shophere"><img src="/graphics/images/homeandgarden.png" width="250" height="200"></a>
-      </div>
-    </div>
-
-    <div style="width: 100%;height:270px;float:left">
-      <div style="float:left;width:280px;height:220px">
-        <a href="shopcategories.asp?category=sporting#shophere"><img src="/graphics/images/sgoods.png" width="250" height="200"></a>
-      </div>
-      <div style="float:left;width:280px;height:220px">
-        <a href="shopcategories.asp?category=toys#shophere"><img src="/graphics/images/toys.png" width="250" height="200"></a>
-      </div>
-      <div style="float:left;width:280px;height:220px">
-        <a href="shopcategories.asp?category=business#shophere"><img src="/graphics/images/bindustrial.png" width="250" height="200"></a>
+      <div class="item" style="float:left;font-weight:bold">
+        <a href="shopcategories.asp?category=motors"><img src="/graphics/images/motors.png"></a>
       </div>
     </div>
 
-    <div style="width: 100%;height:270px;float:left">
-      <div style="float:left;width:280px;height:220px">
-        <a href="shopcategories.asp?category=music#shophere"><img src="/graphics/images/music.png" width="250" height="200"></a>
+    <div style="width: 100%;height:240px;float:left">
+      <div class="item" style="float:left;font-weight:bold">
+        <a href="shopcategories.asp?category=electronics"><img src="/graphics/images/electronics.png"></a>
       </div>
-      <div style="float:left;width:280px;height:220px">
-        <a href="shopcategories.asp?category=deals#shophere"><img src="/graphics/images/deals.png" width="250" height="200"></a>
+      <div class="item" style="float:left;font-weight:bold">
+        <a href="shopcategories.asp?category=collectibles"><img src="/graphics/images/collectibles.png"></a>
       </div>
-      <div style="float:left;width:280px;height:220px">
-        <a href="shopcategories.asp?category=under10#shophere"><img src="/graphics/images/under10.png" width="250" height="200"></a>
+      <div class="item" style="float:left;font-weight:bold">
+        <a href="shopcategories.asp?category=home"><img src="/graphics/images/homeandgarden.png"></a>
       </div>
-    </div>
     </div>
 
+    <div style="width: 100%;height:240px;float:left">
+      <div class="item" style="float:left;font-weight:bold">
+        <a href="shopcategories.asp?category=sporting"><img src="/graphics/images/sgoods.png"></a>
+      </div>
+      <div class="item" style="float:left;font-weight:bold">
+        <a href="shopcategories.asp?category=toys"><img src="/graphics/images/toys.png"></a>
+      </div>
+      <div class="item" style="float:left;font-weight:bold">
+        <a href="shopcategories.asp?category=business"><img src="/graphics/images/bindustrial.png"></a>
+      </div>
+    </div>
+
+    <div style="width: 100%;height:240px;float:left">
+      <div class="item" style="float:left;font-weight:bold">
+        <a href="shopcategories.asp?category=music"><img src="/graphics/images/music.png"></a>
+      </div>
+      <div class="item" style="float:left;font-weight:bold">
+        <a href="shopcategories.asp?category=deals"><img src="/graphics/images/deals.png"></a>
+      </div>
+      <div class="item" style="float:left;font-weight:bold">
+        <a href="shopcategories.asp?category=under10"><img src="/graphics/images/under10.png"></a>
+      </div>
+    </div>
+
+    <div style="width: 100%;height:240px;float:left">
+      <div class="item" style="float:left;font-weight:bold">
+        <a href="shopcategories.asp?category=beauty"><img src="/graphics/images/beauty.png"></a>
+      </div>
+      <div class="item" style="float:left;font-weight:bold">
+        <a href="shopcategories.asp?category=personal"><img src="/graphics/images/personalcare.png"></a>
+      </div>
+      <div class="item" style="float:left;font-weight:bold">
+        <a href="shopcategories.asp?category=jewelry"><img src="/graphics/images/jewelry.png"></a>
+      </div>
+    </div>
+
+    <div style="width: 100%;height:240px;float:left">
+      <div class="item" style="float:left;font-weight:bold">
+        <a href="shopcategories.asp?category=handmade"><img src="/graphics/images/handmade.png"></a>
+      </div>
+      <div class="item" style="float:left;font-weight:bold">
+        <a href="shopcategories.asp?category=travel"><img src="/graphics/images/travel.png"></a>
+      </div>
+      <div class="item" style="float:left;font-weight:bold">
+        <a href="shopcategories.asp?category=office"><img src="/graphics/images/op.png"></a>
+      </div>
+    </div>
+
+    <div style="width: 100%;height:240px;float:left">
+      <div class="item" style="float:left;font-weight:bold">
+        <a href="shopcategories.asp?category=pet"><img src="/graphics/images/pet.png"></a>
+      </div>
+      <div class="item" style="float:left;font-weight:bold">
+        <a href="shopcategories.asp?category=appliances"><img src="/graphics/images/app.png"></a>
+      </div>
+      <div class="item" style="float:left;font-weight:bold">
+        <a href="shopcategories.asp?category=all"><img src="/graphics/images/all.png"></a>
+      </div>
+    </div>
+    </div>
+<%
+else
+%>
+<div>
+  <a href="shopcategories.asp"><img src="/graphics/images/shopformoreitems.png"></a>
+  </div>
+<%
+end if
+%>
     <div style="float:left; width:100%">
-      <a name="shophere" />
+      <a name="shopheref" />
       <br><br>
-      <h1>Shop <%=category%></h1>
+      <%
+      dim categoryName
+
+      if category = "fashion" then
+        categoryName = "Fashion"
+%>
+      <img src="/graphics/images/fashion-banner.png">
+<%
+      elseif category = "kitchen" then
+        categoryName = "Kitchen"
+%>
+      <img src="/graphics/images/kitchen-banner.png">
+<%
+      elseif category = "software" then
+        categoryName = "Software"
+%>
+      <img src="/graphics/images/software-banner.png">
+<%
+      elseif category = "computer" then
+        categoryName = "Computer"
+%>
+      <img src="/graphics/images/computer-banner.png">
+<%
+      elseif category = "misc" then
+        categoryName = "Miscellaneous"
+%>
+      <img src="/graphics/images/misc-banner.png">
+<%
+      elseif category = "motors" then
+        categoryName = "Motors"
+%>
+      <img src="/graphics/images/motors-banner.png">
+<%
+      elseif category = "electronics" then
+        categoryName = "Electronics"
+%>
+      <img src="/graphics/images/electronics-banner.png">
+<%
+      elseif category = "collectibles" then
+        categoryName = "Collectibles & Art"
+%>
+      <img src="/graphics/images/collectibles-banner.png">
+<%
+      elseif category = "home" then
+        categoryName = "Home & Garden"
+%>
+      <img src="/graphics/images/home-banner.png">
+<%
+      elseif category = "sporting" then
+        categoryName = "Sporting Goods"
+%>
+      <img src="/graphics/images/sporting-banner.png">
+<%
+      elseif category = "toys" then
+        categoryName = "Toys"
+%>
+      <img src="/graphics/images/toys-banner.png">
+<%
+      elseif category = "business" then
+        categoryName = "Business & Industrial"
+%>
+      <img src="/graphics/images/business-banner.png">
+<%
+      elseif category = "music" then
+        categoryName = "Music"
+%>
+      <img src="/graphics/images/music-banner.png">
+<%
+      elseif category = "deals" then
+        categoryName = "Deals"
+%>
+      <img src="/graphics/images/deals-banner.png">
+<%
+      elseif category = "under10" then
+        categoryName = "Under 10"
+%>
+      <img src="/graphics/images/under-10-banner.png">
+<%
+      elseif category = "beauty" then
+        categoryName = "Beauty"
+%>
+      <img src="/graphics/images/beauty-banner.png">
+<%
+      elseif category = "personal" then
+        categoryName = "Personal Care"
+%>
+      <img src="/graphics/images/personalcare-banner.png">
+<%
+      elseif category = "jewelry" then
+        categoryName = "Jewelry"
+%>
+      <img src="/graphics/images/jewelry-banner.png">
+<%
+      elseif category = "handmade" then
+        categoryName = "Handmade"
+%>
+      <img src="/graphics/images/handmade-banner.png">
+<%
+      elseif category = "travel" then
+        categoryName = "Travel"
+
+      elseif category = "office" then
+        categoryName = "Office Products"
+
+      elseif category = "pet" then
+        categoryName = "Pet Supplies"
+
+      elseif category = "appliances" then
+        categoryName = "Appliances"
+
+      elseif category = "all" then
+        categoryName = "All"
+
+      end if
+      %>
+      <h1>Shop <%=categoryName%></h1>
     </div>
 
     <%
@@ -93,7 +268,7 @@
     ssql = "WITH sellProds AS "
 
     ssql = ssql & "("
-    ssql = ssql & "    SELECT *,"
+    ssql = ssql & "    SELECT category, image, itemid, name, price,"
     ssql = ssql & "    ROW_NUMBER() OVER (ORDER BY itemid DESC) AS 'RowNumber'"
     if category = "all" then
       ssql = ssql & "    FROM products"
@@ -108,36 +283,42 @@
     set oRS = oConnection.Execute(ssql)
 
     dim count
-    count = 0
+    count = a - 1
 
     while not oRS.eof
 
     if count mod 4 = 0 then
-    if count = 0 then
+    if count = a - 1 then
     %>
       <div stylef = "width:800px;float:left;position:relative;left:-100px">
+        <%
+        if a <> 1 then
+        %>
       <div style = "float:left; width: 50px; height: 300px">
       <a href='shopcategories.asp?a=<%=a-8%>&b=<%=b-8%>'>less...</a>
     </div>
+        <%
+        end if
+        %>
     <%
     end if
     end if
     %>
-    <div style = "float:left; width: 200px; height: 300px">
+    <div style = "float:left; width: 250px; height: 400px">
       <div>
-        <a href='item.asp?itemid=<%=oRS("itemid")%>'><img src='/productitems/<%=oRS("image")%>' width="150" height="150"></a>
+        <a style="" href='item.asp?itemid=<%=oRS("itemid")%>'><%=oRS("name")%></a><br>
+        <a style="color:red" href='item.asp?itemid=<%=oRS("itemid")%>'>$<%=oRS("price")%> USD</a>
       </div>
-      <div>
-        <a style="" href='item.asp?itemid=<%=oRS("itemid")%>'><%=oRS("name")%></a>
+      <div style = "width: 200px; height: 200px">
+        <a href='item.asp?itemid=<%=oRS("itemid")%>'><img src='/productitems/<%=oRS("image")%>'></a>
       </div>
-      </p>
     </div>
 
     <%
     if count = b - 1 then
 %>
-      <div style = "float:left; width: 50px; height: 300px">
-      <a href='shopcategories.asp?a=<%=a+8%>&b=<%=b+8%>'>more...</a>
+      <div style = "float:left; width: 250px; height: 300px">
+      <a href='shopcategories.asp?a=<%=a+8%>&b=<%=b+8%>'><img src="/graphics/images/more.png"></a>
       </div>
 <%
     end if

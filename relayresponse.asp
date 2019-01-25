@@ -39,25 +39,23 @@ s_country = request.form("x_custom_7")
 
 dim oRS
 
-sConnection = "Dsn=odbc1;Integrated Security=True"
-
 set oConnection = server.createobject("ADODB.Connection")
 
-oConnection.Open "odbc1","sa","coppersink21"
+oConnection.Open "odbc2","sa","coppersink21"
 
 dim sqlstr
 
 sqlstr = "SELECT * FROM shoppers WHERE username='" & username & "'"
-
+'response.write sqlstr
 set oRS = oConnection.Execute(sqlstr)
 
 if not oRS.eof then
   mailtothisfool = oRS("email")
 end if
-
+'response.write mailtothisfool
 sqlstr = "INSERT INTO [order] (username, price, inputdate, s_address, s_city, s_state, s_zipcode, s_country) VALUES "
 sqlstr = sqlstr & "('"&username&"',"&Amount&",getDate(),'"&s_address&"','"&s_city&"','"&s_state&"','"&s_zipcode&"','"&s_country&"')"
-response.write sqlstr
+'response.write sqlstr
 oConnection.Execute(sqlstr)
 
 sqlstr = "SELECT orderid FROM [order] ORDER BY orderid DESC"
@@ -80,7 +78,7 @@ if not rs.eof then
   	itemid = r_s("itemid")
 
   	sqlstr = "INSERT INTO orderitems (orderid,itemid) VALUES ("&orderid&","&itemid&")"
-
+    'response.write sqlstr
   	oConnection.Execute(sqlstr)
 
     r_s.movenext
@@ -90,7 +88,7 @@ if not rs.eof then
 end if
 
 sqlstr = "DELETE FROM cart WHERE cid = " & cartid
-
+'response.write sqlstr
 oConnection.Execute(sqlstr)
 
 oConnection.close()

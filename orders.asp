@@ -52,14 +52,6 @@
 
     %>
 
-    <div style = "width:100%;float:left;position:relative;top:0px">
-
-    <div style="float:left;width:180px">order id</div>
-    <div style="float:left;width:180px">price</div>
-    <div>buy date</div>
-
-    </div>
-    
     <div style = "width:800px;float:left">
       <span><hr style="color:#f0f0f0"></span>
     </div>

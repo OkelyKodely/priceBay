@@ -106,8 +106,8 @@
       dsc = oRS("description")
     %>
   <div id = "container" style = "width:100%">
-    <div class="shoptitle" style="height:60px;font-size:32px">
-          Auction For: <%=oRS("name")%>
+    <div class="shoptitle" style="height:60px;font-size:32px;font-weight:bold">
+          Bid On Item
     </div>
     <div id = "middle" style = "float:left; width: 250;">
           <a href=item.asp?itemid=<%=oRS("id")%>><img width="220" height="150" src=/productitems/<%=oRS("image")%>></a>

@@ -1,6 +1,6 @@
   <!-- #include file="inc/header.inc" -->
   <h1>&nbsp;</h1>
-  <h1 style="position:relative;left:100px">Make Payment For Auction Won item</h1>
+  <h2 style="position:relative;left:100px;top:-150px">Make Payment For Auction Won Item</h2>
   <div class="shop" style="height:500px;position:relative;left:100px">
   
     <%
@@ -78,7 +78,7 @@
         session("itemid") = id
     %>
         <div style="float:left ; width:500px; float:left">
-      <a href="buyproducts.asp"><img src="/graphics/images/shopformoreitems.png"></a>
+      <a href="buyproducts.asp"><im src="/graphics/images/shopformoreitems.png"></a>
     </div>
 
   <div id = "container" style = "width:100%; position:relative;top:-200px">
@@ -115,7 +115,7 @@
 <input type="hidden" name="cn" value="Add special instructions to the seller:">
 <input type="hidden" name="no_shipping" value="2">
 <input type="hidden" name="rm" value="1">
-<input type="hidden" name="return" value="http://172.3.226.131/paypal.asp">
+<input type="hidden" name="return" value="http://pricebay.gq/paypal.asp">
 <input type="hidden" name="bn" value="PP-BuyNowBF:btn_buynowCC_LG.gif:NonHosted">
 <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
 <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">

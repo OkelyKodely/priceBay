@@ -6,7 +6,7 @@
 
     itemid = request.querystring("itemid")
     
-    sqlstr = "SELECT * FROM products WHERE itemid='" & itemid & "'"
+    sqlstr = "SELECT price,category,itemid,name,image,dsc,discount,newarrivals FROM products WHERE itemid='" & itemid & "'"
 
     set oRS = oConnection.Execute(sqlstr)
 
@@ -17,8 +17,89 @@
   <div class="shop" style="position:relative;top:-70px">
   
     <div class="shoptitle">
-  	  <span style="font-size:26">Shop | <%=category%></span>
+      <%
+      dim categoryName
+
+      if category = "fashion" then
+        categoryName = "Fashion"
+
+      elseif category = "kitchen" then
+        categoryName = "Kitchen"
+
+      elseif category = "software" then
+        categoryName = "Software"
+
+      elseif category = "computer" then
+        categoryName = "Computer"
+
+      elseif category = "misc" then
+        categoryName = "Miscellaneous"
+
+      elseif category = "motors" then
+        categoryName = "Motors"
+
+      elseif category = "electronics" then
+        categoryName = "Electronics"
+
+      elseif category = "collectibles" then
+        categoryName = "Collectibles & Art"
+
+      elseif category = "home" then
+        categoryName = "Home & Garden"
+
+      elseif category = "sporting" then
+        categoryName = "Sporting Goods"
+
+      elseif category = "toys" then
+        categoryName = "Toys"
+
+      elseif category = "business" then
+        categoryName = "Business & Industrial"
+
+      elseif category = "music" then
+        categoryName = "Music"
+
+      elseif category = "deals" then
+        categoryName = "Deals"
+
+      elseif category = "under10" then
+        categoryName = "Under 10"
+
+      elseif category = "beauty" then
+        categoryName = "Beauty"
+
+      elseif category = "personal" then
+        categoryName = "Personal Care"
+
+      elseif category = "jewelry" then
+        categoryName = "Jewelry"
+
+      elseif category = "handmade" then
+        categoryName = "Handmade"
+
+      elseif category = "travel" then
+        categoryName = "Travel"
+
+      elseif category = "office" then
+        categoryName = "Office Products"
+
+      elseif category = "pet" then
+        categoryName = "Pet Supplies"
+
+      elseif category = "appliances" then
+        categoryName = "Appliances"
+
+      elseif category = "all" then
+        categoryName = "All"
+
+      end if
+      %>
+  	  <span style="font-size:26">Shop <%=categoryName%></span>
     </div>
+
+    <p>
+      &nbsp;
+    </p>
 
     <!--<div class="categoryitems">
       <a href="categories.asp">Shop Categories</a>
@@ -46,7 +127,7 @@
       
     end if
 
-    sqlstr = "SELECT * FROM products WHERE itemid='" & itemid & "'"
+    sqlstr = "SELECT price,category,itemid,name,image,dsc,discount,newarrivals FROM products WHERE itemid='" & itemid & "'"
 
     set oRS = oConnection.Execute(sqlstr)
 
@@ -138,6 +219,7 @@ function imageZoom(imgID, resultID) {
 
 <div class="img-zoom-container" style="width:100%;float:left">
   <div style="float:left">
+    <p style="width:350px"><b>Name:</b> <%=oRS("name")%></p>
     <img id="myimage" src='/productitems/<%=oRS("image")%>' width="300" height="240">
   </div>
   <div style="float:left;position:relative;left:60px">
@@ -146,28 +228,119 @@ function imageZoom(imgID, resultID) {
   </div>
 </div>
         <script>imageZoom("myimage", "myresult"); </script>
-          <br><p style="width:350px">Name: <%=oRS("name")%></p>
       </div>
       <div id = "right" style = "float:left; width: 350;">
-        <span style="color:#000">Description:</span>
+        <span style="color:#000"><b>Description:</b></span>
         <%=dsc%><br><br>
-        <span style="color:#ff0000"><strikeout>Price:</strikeout></span>
-        <span style="color:#ff0000"><strikeout>$<%=oRS("price")%></strikeout></span><br><br>
-        <span style="color:#000">Discount Price:</span>
+        <span style="color:#ff0000"><b>Price:</b></span>
+        <span style="color:#ff0000">$<%=oRS("price")%></span><br><br>
+        <span style="color:#000"><b>Discount Price:</b></span>
         <b>$<%=(100-cdbl(oRS("discount")))*cdbl(oRS("price"))/100%></b><br><br>
         <form method="post" action="cart.asp">
           <input type="hidden" name="itemid" value=<%=oRS("itemid")%>>
-          <input type="submit" value="Add To cart" style="width:200px; height:40px">
+          <input type="submit" value="Add To cart" style="font-weight:bold;width:200px; height:40px">
         </form>
       </div>
   </div>
+
+    <div style = "width:1200px;float:left;position:relative;top:70px;left:0px">
+      <a href="shopcategories.asp"><img src="/graphics/images/shopformoreitems.png"></a>
+<br><br>
+      <a href="shopcategories.asp?category=<%=category%>"><img src="/graphics/images/more.png"> from <%=category%></a>
+    </div>
+
   <%
+    sqlstr = "SELECT price,category,itemid,name,image,dsc,discount,newarrivals FROM products WHERE recommendation =" & itemid
+
+    set sr = oConnection.Execute(sqlstr)
+
+    dim count
+
+    count = 0
+
+    dim c, d
+    c = request("c")
+
+    d = request("d")
+
+    if c = "" then
+      c = 1
+      d = 8
+    end if
+
+    while not sr.eof
+
+    if count mod 8 = 0 then
+    %>
+      <div style = "width:1200px;float:left;position:relative;top:70px;left:0px">
+      <h1>Recommendations</h1>
+    <%
+    if count = 0 and c <> 1 then
+    %>
+      <div stylef = "width:1200px;float:left;position:relative;left:-100px">
+      <div style = "float:left; width: 150px; height: 50px">
+      <a href='item.asp?itemid=<%=sr("itemid")%>&c=<%=c-8%>&d=<%=d-8%>'>less...</a>
+    </div>
+    <%
+    end if
+    end if
+    %>
+    <div style = "float:left; width: 300px; height: 400px">
+      <div>
+        <a style="" href='item.asp?itemid=<%=sr("itemid")%>'><%=sr("name")%></a><br>
+        <a style="color:red" href='item.asp?itemid=<%=sr("itemid")%>'>$<%=sr("price")%> USD</a>
+      </div>
+      <div>
+        <a href='item.asp?itemid=<%=sr("itemid")%>'><img src='/productitems/<%=sr("image")%>' width="200" height="230"></a>
+      </div>
+    </div>
+    <%
+    if count = d - 1 then
+%>
+      <div style = "float:left; width: 150px; height: 100px">
+      <a href='item.asp?itemid=<%=sr("itemid")%>&c=<%=c+8%>&d=<%=d+-8%>'><img src="/graphics/images/more.png"></a>
+      </div>
+<%
+    end if
+
+    if count mod 8 = 7 then
+    %>
+      </div>
+    <%
+    end if
+    %>
+<%
+  sr.movenext
+  count = count + 1
+wend
+
+if count mod 7 <> 6 then
+    %>
+      </div>
+    <%
+end if
+
   end if
   %>
 
   </div>
   <h1>&nbsp;</h1>  
   <h1>&nbsp;</h1>  
+  <h1>&nbsp;</h1>  
+  <h1>&nbsp;</h1>  
+  <h1>&nbsp;</h1>  
+  <h1>&nbsp;</h1>  
+
+
+  <h1>&nbsp;</h1>  
+  <h1>&nbsp;</h1>  
+  <h1>&nbsp;</h1>  
+  <h1>&nbsp;</h1>  
+  <h1>&nbsp;</h1>  
+  <h1>&nbsp;</h1>  
+  <h1>&nbsp;</h1>  
+  <h1>&nbsp;</h1>  
+
   <h1>&nbsp;</h1>  
   <h1>&nbsp;</h1>  
   <h1>&nbsp;</h1>  

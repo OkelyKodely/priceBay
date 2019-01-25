@@ -116,12 +116,11 @@
   end if
   %>
 
-  <div class="signup" style="float:left;position:relative;top:-100px">
+  <div class="signup" style="float:left;position:relative;top:-50px">
     <div style="height:60px">
       <div>
-      <span style="font-size:36;">Sign Up</span><br>
+      <span style="font-size:36;">Sign Up for free!</span><br>
     </div>
-      <span style="position:relative;left:500px;top:0px"><img src="/graphics/images/signup-for-free.png"></span><br>
     </div>
   	<form method="post" id="frm" action="" onsubmit="return validateThenSubmit()">
       <div style="float:left;width:140px">First Name:</div>
@@ -167,6 +166,8 @@
   	</form>
   </div>
 
+  <h1>&nbsp;</h1>
+  <h1>&nbsp;</h1>
   <h1>&nbsp;</h1>
   <h1>&nbsp;</h1>
   <h1>&nbsp;</h1>
