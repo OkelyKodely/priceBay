@@ -15,7 +15,13 @@
           | <a href="/logIn.asp" style="color:gray;">Sign In</a>
         <%end if%>
   	    <br><br>
+        <form method="post" action="subscribe.asp">
+          Email <input type="text" name="email">
+          <input type="submit" value="Subscribe">
+        </form>
         <img src="/graphics/images/ssl.png">
+        <img src="/graphics/images/ppez2.png">
+        <img src="/graphics/images/auth.png">
         <br><br>
         <div>
   	      Copyright &copy; 2019 <a href="/shop.asp" style="color:gray;">priceBay Inc.</a> All Rights Reserved
