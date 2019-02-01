@@ -9,8 +9,11 @@ set oConnection = server.createobject("ADODB.Connection")
 oConnection.Open "odbc2","sa","coppersink21"
 %>
 <html>
+  <title>
+    The Official Website Of Price Bay
+  </title>
   <head>
-<link rel="stylesheet" href="https://www.jqueryscript.net/demo/Amazon-Like-Drop-Down-Menu-Plugin-with-jQuery-Menu-Aim/example/css/bootstrap.css" rel="stylesheet">
+<link rel="stylesheet" href="bootstrap.css" rel="stylesheet">
     <script>
 // When the user scrolls down 20px from the top of the document, show the button
 window.onscroll = function() {scrollFunction()};
@@ -33,7 +36,7 @@ function topFunction() {
     	  body {
     		    font-family: arial;
     		    color:#000;
-            background-color: #eee;
+            background-color: #ffffff;
             height:100%;
     	  }
         a {
@@ -178,7 +181,7 @@ function topFunction() {
         z-index: 99; /* Make sure it does not overlap */
         border: 1px solid black; /* Remove borders */
         outline: none; /* Remove outline */
-        background-color: #fff; /* Set a background color */
+        background-color: #ccffcc; /* Set a background color */
         color: #000; /* Text color */
         cursor: pointer; /* Add a mouse pointer on hover */
         padding: 15px; /* Some padding */
@@ -188,12 +191,12 @@ function topFunction() {
 
       #myBtn:hover {
         color:black;
-        background-color: orange; /* Add a white background on hover */
+        background-color: green;
       }
     </style>
   </head>
 <body>
-  <div style="width:100%;height:130px;background-color:#ddd;margin-bottom:70px;position:relative;top:-10px">
+  <div style="width:1300px;height:150px;background-color:#ddd;margin-bottom:70px;position:relative;top:-10px">
 <%
     dim carid
 
@@ -307,6 +310,33 @@ width:400px;
 </style>
   <div class="menu" style="float:left;position:relative;top:80px">
 <style>
+    .styled1 {
+    border: 0;
+    line-height: 2.5;
+    padding: 0 20px;
+    font-size: 1rem;
+    text-align: right;
+    color: green;
+    text-shadow: 1px 1px 1px #000;
+    border-radius: 10px;
+    background-color: rgba(230, 230, 230, 1);
+    background-image: linear-gradient(to top left,
+                                      rgba(0, 0, 0, .2),
+                                      rgba(0, 0, 0, .2) 30%,
+                                      rgba(0, 0, 0, 0));
+    box-shadow: inset 2px 2px 3px rgba(255, 255, 255, .6),
+                inset -2px -2px 3px rgba(0, 0, 0, .6);
+}
+
+.styled1:hover {
+    background-color: rgba(220, 220, 220, 1);
+}
+
+.styled1:active {
+    box-shadow: inset -2px -2px 3px rgba(0, 0, 0, .6),
+                inset 2px 2px 3px rgba(0, 0, 0, .6);
+}
+
     .styled {
     border: 0;
     line-height: 2.5;
@@ -335,15 +365,15 @@ width:400px;
 }
 </style>
     <!--<div class="menuitem"><a href="/shop.asp">Home</a></div>-->
-    <div style="float:left; width: 250px; position:relative; left:0px;top:-140px">
-      <a href="/shop.asp"><img src="/graphics/images/logo.bmp"></a>
+    <div style="float:left; width: 250px; position:relative; left:44px;top:-140px">
+      <a href="/shop.asp"><img src="/graphics/images/logo.png"></a>
     </div>
     <div class="menuitem" style="float:left;position:relative;left:-40px">
 <div class="nav-collapse collapse">
-<ul style="list-style-type: none">
+<ul style="list-style-type: none; position:relative; left:24px;">
 <li class="active"> 
 
-  <a class="dropdown-toggle" data-toggle="dropdown" style="color:black">Your Category Choice <img src="/graphics/images/downs.png"></a>
+  <a class="dropdown-toggle" data-toggle="dropdown" style="color:black">Shop... <img src="/graphics/images/downs.png"></a>
 <!--
                   jQuery-menu-aim: this <ul> defines the dropdown main menu and its contents.
                   This is just one of many possible examples for defining the menu's HTML.
@@ -508,9 +538,8 @@ Fashion</a>
 </div>
 </div>
 
-<script src="https://www.jqueryscript.net/demo/Amazon-Like-Drop-Down-Menu-Plugin-with-jQuery-Menu-Aim/example/js/jquery-1.9.1.min.js"></script> 
-<script src="https://www.jqueryscript.net/demo/Amazon-Like-Drop-Down-Menu-Plugin-with-jQuery-Menu-Aim/example/jquery.menu-aim.js"></script> 
-<script src="https://www.jqueryscript.net/demo/Amazon-Like-Drop-Down-Menu-Plugin-with-jQuery-Menu-Aim/example/js/bootstrap.min.js"></script> 
+<script src="jquery-1.9.1.min.js"></script> 
+<script src="bootstrap.min.js"></script> 
 <script>
 
         var $menu = $(".dropdown-menu");
@@ -567,6 +596,12 @@ Fashion</a>
         });
 
     </script>
+    <div class="menuitem" onclick="window.location.href='/about.asp'">
+      <button class="favorite styled"
+              type="button">
+            <a href="/about.asp" style="color:white">What is Price Bay?</a>
+      </button>&nbsp;
+    </div>&nbsp;
     <div class="menuitem" onclick="window.location.href='/newarrivals.asp'">
       <button class="favorite styled"
               type="button">
@@ -633,6 +668,11 @@ Fashion</a>
   end if
 %>
   <br>
+  <div style="font-size:13px;position:relative;top:-5px;z-index:1">
+    <br>
+<a href="shopcategories.asp?category=fashion">Fashion</a> | <a href="shopcategories.asp?category=kitchen">kitchen</a> | <a href="shopcategories.asp?category=software">Software</a> | <a href="shopcategories.asp?category=computer">Computer</a> | <a href="shopcategories.asp?category=misc">Miscellaneous</a> | <a href="shopcategories.asp?category=motors">Motors</a> | <a href="shopcategories.asp?category=electronics">Electronics</a> | <a href="shopcategories.asp?category=collectibles">Collectibles & Art</a> | <a href="shopcategories.asp?category=home">Home & Garden</a> | <a href="shopcategories.asp?category=sporting">Sporting Goods</a> | <a href="shopcategories.asp?category=toys">Toys</a> | <a href="shopcategories.asp?category=business">Business & Industrial</a> | <a href="shopcategories.asp?category=music">Music</a> | <a href="shopcategories.asp?category=deals">Deals</a> | <a href="shopcategories.asp?category=under10">Under $10</a> | <a href="shopcategories.asp?category=all">More</a>
+<br>
+  </div>
   </div>
 
   </div>

@@ -2,7 +2,7 @@
       <div style="position:absolute;left:300px;">
         <br><br><br>
         <a href="/termsOfService.asp" style="color:gray;">Terms Of Service</a> | 
-  	    <a href="/categories.asp" style="color:gray;">Shop</a> |
+  	    <a href="/shopcategories.asp" style="color:gray;">Shop</a> |
   	    <a href="/about.asp" style="color:gray;">About</a> |
   	    <a href="/buyProducts.asp" style="color:gray;">Buy</a> |
   	    <a href="/sell.asp" style="color:gray;">Sell</a>
