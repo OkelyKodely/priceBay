@@ -9,7 +9,7 @@
       &nbsp;
     </p>
 <div style="width:1000px;height:240px;">
-  <img src="/graphics/images/bid.png">
+  <img src="/graphics/images/bid-banner.png">
 </div>
     <p>
       &nbsp;

@@ -16,15 +16,15 @@
   end if
 
   %>
-  <div class="login" style="float:left; width:100%">
-  <h1 style="position:relative;left:100px;top:-50px">Sign In</h1>
+  <div class="login" style="float:left; width:100%; height:700px">
+  <h1 style="position:relative;left:-100px;top:-50px">Returning Customer - Sign In</h1>
   <%
   if username = "" then
   %>
-      <div style="width:600px;height:600px;background-image:url('/graphics/images/loginbg.png');background-repeat:no-repeat;background-attached:fixed;background-position:center;position:relative;left:-150px;top:-200px">
+      <div style="width:600px;height:600px;background-image:url('/graphics/images/loginbg.png');background-repeat:no-repeat;background-attached:fixed;background-position:center;position:relative;left:-300px;top:-200px">
         <div>
 
-    <div style="position:relative;left:200px;top:150px;z-index:2">
+    <div style="position:relative;left:50px;top:150px;z-index:2">
     <div style="height:70px;position:relative;top:-50px">
     </div>
   	      <form method="post" action="">
@@ -38,6 +38,19 @@
         </div>
       </div>
     </div>
+
+      <div style="float:left;width:400px;height:600px;ackground-image:url('/graphics/images/loginbg.png');background-repeat:no-repeat;background-attached:fixed;background-position:center;position:relative;left:300px;top:-800px">
+        <div>
+
+    <div style="position:relative;left:50px;top:150px;z-index:2">
+    <div style="height:70px;position:relative;top:-50px">
+    </div>
+    Don't have an account with us?<br>
+    <a href="signup.asp"><h1>Create Account</h1></a>
+        </div>
+      </div>
+    </div>
+
 <%
 else
 
@@ -61,5 +74,5 @@ end if
 %>
   </div>
 
-<h1>&nbsp;</h1>
+<p>&nbsp;</p>
   <!-- #include file="inc/footer.inc" -->

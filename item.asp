@@ -134,8 +134,9 @@
     if not oRS.eof then
       dim dsc
       dsc = oRS("dsc")
+      dsc = left(dsc, 1000)
     %>
-  <div id = "container" style = "width:100%">
+  <div id = "container" style = "width:1200px">
       <div id = "middle" style = "float:left; width: 750;">
 <style>
 * {box-sizing: border-box;}

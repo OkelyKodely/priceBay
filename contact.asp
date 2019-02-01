@@ -1,6 +1,6 @@
 <!-- #include file="inc/header.inc" -->
 <div class="tos">
-  <p style="height:10px;font-size:30px;position:relative;top:-70px">Contact</p>
+  <p style="height:10px;font-size:30px;position:relative;top:-70px">Contact Us</p>
   <span style="color:black">
     Address: 3266 Connecticut St. Apt. #303, Los Angeles, CA 90005, USA
     <br><br><br>

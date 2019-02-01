@@ -1,14 +1,14 @@
   <!-- #include file="inc/header.inc" -->
   <div class="shop" style="float:left">
   
-    <div class="shoptitle" style="position:relative;top:-100px">
-      <span style="font-size:36">Best Seller items</span>
-    </div><br>
-<div style="position:relative;top:-100px">
-  <a href="shopcategories.asp"><img src="/graphics/images/shopformoreitems.png"></a>
+<div style="position:relative;top:-100px;left:-100px;top:-110px">
+      <img src="/graphics/images/best-sellers-banner.png" width="1400" height="250"><br><br>
   </div>
 
-      <img src="/graphics/images/best-sellers-banner.png">
+    <div class="shoptitle" style="position:relative;top:-100px">
+      <span style="font-size:36">Best Seller items</span><br><br>
+      <a href="shopcategories.asp"><img src="/graphics/images/shopformoreitems.png"></a>
+      </div>
 
     <%
     dim a, b

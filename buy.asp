@@ -2,7 +2,10 @@
   <%
   %>
   <h1>&nbsp;</h1>
-  <h1 style="position:relative;left:100px">Make Payment For priceBay Items</h1>
+  <h1 style="position:relative;left:100px;top:-120px">Make Payment For Your Cart Items</h1>
+
+  <a href="cart.asp" style="color:gray"><h3 style="position:relative;left:100px;top:-70px;">View Your Cart</h3></a>
+
   <div class="shop">
   
     <div class="shoptitle">
